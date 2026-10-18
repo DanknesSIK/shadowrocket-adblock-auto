@@ -93,10 +93,10 @@ def approved_script(line, cfg, source_id):
         return False
     if len(line) > 15000:
         return False
-    if not re.search(r"\\btype\\s*=\\s*http-response\\b", line, re.I):
+    if not re.search(r"\btype\s*=\s*http-response\b", line, re.I):
         return False
-    script_url = re.search(r"(?:^|,)\\s*script-path\\s*=\\s*(https://[^,\\s]+)", line, re.I)
-    target = re.search(r"(?:^|,)\\s*pattern\\s*=\\s*([^,]+)", line, re.I)
+    script_url = re.search(r"(?:^|,)\s*script-path\s*=\s*(https://[^,\s]+)", line, re.I)
+    target = re.search(r"(?:^|,)\s*pattern\s*=\s*([^,]+)", line, re.I)
     if not script_url or not target:
         return False
     path_prefix = "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/"
@@ -106,7 +106,7 @@ def approved_script(line, cfg, source_id):
     allowed_domains = cfg.get("approved_script_files", {}).get(filename)
     if not allowed_domains or "/" in filename or not filename.endswith(".js"):
         return False
-    normalized_pattern = target.group(1).lower().replace("\\\\", "")
+    normalized_pattern = target.group(1).lower().replace("\\", "")
     if protected(target.group(1), cfg["protected_domain_suffixes"]):
         return False
     return any(domain in normalized_pattern for domain in allowed_domains)
@@ -215,9 +215,9 @@ def assemble(conf, downloaded):
         "remote_js_enabled": bool(combined["Script"]),
         "enabled_script_count": len(combined["Script"]),
         "script_urls": list(dict.fromkeys(
-            re.search(r"script-path=(https://[^,\\s]+)", line).group(1)
+            re.search(r"script-path=(https://[^,\s]+)", line).group(1)
             for line in combined["Script"]
-            if re.search(r"script-path=(https://[^,\\s]+)", line)
+            if re.search(r"script-path=(https://[^,\s]+)", line)
         )),
         "warning": "Third-party scripts access decrypted App responses; their content can change upstream. Rules are not device-tested.",
         "sources": report_sources
