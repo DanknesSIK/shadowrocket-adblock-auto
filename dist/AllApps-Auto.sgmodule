@@ -1,5 +1,5 @@
 #!name=Shadowrocket AdBlock Auto | 多仓库去广告
-#!desc=多仓库定时同步，默认禁用远程脚本，谨慎使用
+#!desc=多仓库去广告｜允许指定第三方响应脚本｜每日自动构建
 #!author=Shadowrocket AdBlock Auto (sources credited in README)
 # Remote JavaScript is disabled. This is not an advertisement blocking guarantee.
 
@@ -2735,6 +2735,76 @@ DOMAIN, ads-video-al.xhscdn.com, REJECT, extended-matching, pre-matching
 DOMAIN, ads-video-qc.xhscdn.com, REJECT, extended-matching, pre-matching
 DOMAIN, t-ads.xiaohongshu.com, REJECT, extended-matching, pre-matching
 AND, ((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com)), REJECT-NO-DROP
+DOMAIN-SUFFIX,cm.ad.bilibili.com,REJECT
+DOMAIN-SUFFIX,cm.adcommon.bilibili.com,REJECT
+DOMAIN-SUFFIX,cm.game.bilibili.com,REJECT
+DOMAIN-SUFFIX,cm.track.biligame.bilibili.com,REJECT
+DOMAIN,amap-aos-info-nogw.amap.com,REJECT
+DOMAIN,free-aos-cdn-image.amap.com,REJECT
+DOMAIN-KEYWORD,logs.amap.com,REJECT
+DOMAIN-KEYWORD,ads.amap.com,REJECT
+DOMAIN,perf.m.jd.com,REJECT
+DOMAIN,mars.jd.com,REJECT
+DOMAIN,ex.m.jd.com,REJECT
+DOMAIN,mllog.jd.com,REJECT
+DOMAIN,waapdg.jd.com,REJECT
+DOMAIN,dsp-x.jd.com,REJECT
+DOMAIN,xlog.jd.com,REJECT
+DOMAIN,janapi.jd.com,REJECT
+DOMAIN,jdqd.jd.com,REJECT
+DOMAIN,sdkfp.jd.com,REJECT
+DOMAIN,second-floor-pro.pf.jd.com,REJECT
+DOMAIN,discover.300hu.com,REJECT
+DOMAIN-KEYWORD,kepler.jd.com,REJECT
+DOMAIN-KEYWORD,keplerapi.jd.com,REJECT
+IP-CIDR,43.160.156.164/32,REJECT,no-resolve
+IP-CIDR,61.170.65.165/32,REJECT,no-resolve
+DOMAIN,flowplus.meituan.net,REJECT
+DOMAIN,hlx.meituan.com,REJECT
+DOMAIN,layout.meituan.net,REJECT
+DOMAIN,httpdnsmultiapi.meituan.com,REJECT
+DOMAIN,httpdnsmultiapivip.meituan.com,REJECT
+DOMAIN-SUFFIX,httpdns.meituan.com,REJECT
+DOMAIN-KEYWORD,report.meituan,REJECT
+DOMAIN-KEYWORD,dnspod.meituan.httpdns,REJECT
+IP-CIDR,103.37.155.60/32,REJECT,no-resolve
+DOMAIN-SUFFIX,ut.taobao.com,REJECT
+DOMAIN,wgo.mmstat.com,REJECT
+DOMAIN-KEYWORD,baichuan.taobao.com,REJECT
+DOMAIN-KEYWORD,o2o-ad-dev.oss-cn,REJECT
+IP-CIDR,59.82.121.172/32,REJECT,no-resolve
+IP-CIDR,59.82.121.72/32,REJECT,no-resolve
+IP-CIDR,59.82.121.216/32,REJECT,no-resolve
+IP-CIDR,59.82.121.222/32,REJECT,no-resolve
+IP-CIDR,59.82.120.33/32,REJECT,no-resolve
+IP-CIDR,59.82.120.252/32,REJECT,no-resolve
+IP-CIDR,59.82.120.171/32,REJECT,no-resolve
+IP-CIDR,59.82.120.210/32,REJECT,no-resolve
+IP-CIDR,59.82.133.36/32,REJECT,no-resolve
+IP-CIDR,59.82.133.78/32,REJECT,no-resolve
+IP-CIDR,203.119.212.22/32,REJECT,no-resolve
+DOMAIN-SUFFIX,163jiasu.com,REJECT
+DOMAIN-SUFFIX,biz.weibo.com,REJECT
+DOMAIN,bootpreload.uve.weibo.com,REJECT
+DOMAIN,datacollection.uve.weibo.com,REJECT
+DOMAIN-SUFFIX,sdkapp.uve.weibo.com,REJECT
+DOMAIN-SUFFIX,adimg.uve.weibo.com,REJECT
+DOMAIN-SUFFIX,click.uve.weibo.com,REJECT
+DOMAIN,apm-native.xiaohongshu.com,REJECT
+DOMAIN-SUFFIX,ad.10010.com,REJECT
+DOMAIN,api.zuihuimai.com,REJECT
+DOMAIN,adx-api.zdmimg.com,REJECT
+DOMAIN,titan.pinduoduo.com,REJECT
+DOMAIN,apm.pinduoduo.com,REJECT
+DOMAIN,ta-a.pinduoduo.com,REJECT
+DOMAIN,ta.pinduoduo.com,REJECT
+DOMAIN,th-a.pinduoduo.com,REJECT
+DOMAIN,th-b.pinduoduo.com,REJECT
+DOMAIN,th.pinduoduo.com,REJECT
+DOMAIN,ta.yangkeduo.com,REJECT
+DOMAIN,th.yangkeduo.com,REJECT
+DOMAIN,meta.yangkeduo.com,REJECT
+DOMAIN,meta.pinduoduo.com,REJECT
 
 [URL Rewrite]
 ^https?:\/\/gab\.122\.gov\.cn\/eapp\/m\/sysquery\/adver$ - reject
@@ -3271,6 +3341,116 @@ https://support.you.163.com/appversync/check.do - reject
 ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/surprisebox\/(?:get_style|open|submit_action) - reject-dict
 ^https?:\/\/www\.xiaohongshu\.com\/api\/marketing\/box\/trigger\? - reject-dict
 ^https?:\/\/www\.xiaohongshu\.com\/api\/sns\/(v\d+\/ads\/resource|v\d+\/hey\/\w+\/hey_gallery) - reject-dict
+^https?:\/\/api\.live\.bilibili\.com\/xlive\/e-commerce-interface\/v\d\/ecommerce-user\/get_shopping_info\? - reject-dict
+^https?:\/\/api\.bilibili\.com\/x\/v2\/dm\/qoe\/show\? - reject-dict
+^https?:\/\/upos-sz-static\.bilivideo\.com\/ssaxcode\/\w{2}\/\w{2}\/\w{32}-1-SPLASH - reject-dict
+^https?:\/\/api\.bilibili\.com\/x\/mengqi\/v\d\/resource\? - reject-dict
+^https?:\/\/amap-aos-info-nogw\.amap\.com\/ws\/aos\/alimama\/splash_screen_rt - reject-dict
+^https?:\/\/m\d\.amap\.com\/ws\/shield\/dsp\/app\/startup\/init\? - reject-dict
+^https?:\/\/m\d\.amap\.com\/ws\/faas\/amap-navigation\/card-service-(?:car-end|route-plan) - reject-dict
+^https?:\/\/m\d\.amap\.com\/ws\/shield\/search\/new_hotword\? - reject-dict
+^https?:\/\/m\d\.amap\.com\/ws\/shield\/search_poi\/tips_adv\? - reject-dict
+^https?:\/\/oss\.amap\.com\/ws\/banner\/lists\/\? - reject-dict
+^https?:\/\/m\d\.amap\.com\/ws\/faas\/amap-navigation\/(?:main-page-assets|main-page-location|ridewalk-end-fc) - reject-dict
+^https?:\/\/m\d\.amap\.com\/ws\/(?:mapapi\/hint_text\/offline_data|message\/notice\/list) - reject-dict
+^https?:\/\/m\d\.amap\.com\/ws\/shield\/scene\/recommend\? - reject-dict
+^https?:\/\/sns\.amap\.com\/ws\/msgbox\/pull_mp\? - reject-dict
+^https?:\/\/m\d-zb\.amap\.com\/ws\/boss\/(?:order\/car\/king_toolbox_car_bubble|tips\/onscene_visual_optimization) - reject-dict
+^https?:\/\/\w{32}\.jddebug\.com\/diagnose\? - reject
+^https?:\/\/storage\.360buyimg\.com\/(?:app\.m\.jd\.com\/lottie|dynamicConfig\/binary|occupy-home\/|xview|appcartsoa\/client\/cart_egg_entry) - reject
+^https?:\/\/img\d+\.360buyimg\.com\/jddjadvertise\/ - reject
+^https?:\/\/storage\.jd\.com\/(?:ti-pythontask\/JD\/jdt_|mpaas2-public\/product\/\d+\/) - reject
+^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=(?:searchBoxWord|xview2Config|stationPullService|getWidget|widget|hybrid|jdDiscoveryRedPoint|queryMaterialAdverts|apollo_style|jdaPreDownload|uniformRecommend7) - reject-200
+^https?:\/\/(?:bdsp-x|dsp-x)\.jd\.com\/adx\/ - reject-200
+^https?:\/\/apimobile\.meituan\.com\/group\/v\d\/recommend\/unity\/recommends - reject-dict
+^https?:\/\/img\.meituan\.net\/bizad - reject-img
+^https?:\/\/p\d\.meituan\.net\/(?:display|mmc)\/ - reject-img
+^https?:\/\/s3plus\.meituan\.net\/v\d\/mss_\w+\/(?:waimai-alita\/\w+\.zip|brandcpt) - reject
+^https?:\/\/w\.meituan\.net\/v\d\/mss_\w+\/waimai-mach\/\d+\/\d+\/pt-im-(?:guider|coupon-card-stateful) - reject
+^https?:\/\/sqt\.meituan\.com\/s\/gateway\/mweb\/api\/marketingResource\/show - reject-dict
+^https?:\/\/img\.meituan\.net\/(?:adunion|display|midas)\/.+\.(?:gif|jpg)\.webp$ - reject-img
+^https?:\/\/img\.meituan\.net\/groceryimages\/\w+\.gif - reject-img
+^https?:\/\/img\.meituan\.net\/groceryimages\/\w+\.png@220w_220h_1e_1l - reject-img
+^https?:\/\/(?:s3plus|flowplus)\.meituan\.net\/v\d\/\w+\/linglong\/.+\.(?:gif|jpg|mp4) - reject-img
+^https?:\/\/portal-portm\.meituan\.com\/horn_ios - reject-dict
+^https?:\/\/acs\.m\.taobao\.com\/gw\/mtop\.etao\.noah\.query\/.+tao_splash - reject-dict
+^https?:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alimama\.etao\.config\.query\/.+?etao_advertise - reject-dict
+^https?:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alibaba\.advertisementservice\.getadv - reject-dict
+^https?:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alimusic\.common\.mobileservice\.startinit - reject-dict
+^https?:\/\/acs\.m\.taobao\.com\/gw\/mtop\.o2o\.ad\.gateway\.get - reject-dict
+^https?:\/\/acs\.m\.taobao\.com\/gw\/mtop\.taobao\.idle\.home\.welcome - reject-dict
+^https?:\/\/acs\.m\.taobao\.com\/gw\/mtop\.trip\.activity\.querytmsresources - reject-dict
+^https?:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.(?:volvo\.secondfloor\.getconfig|wireless\.home\.newface\.awesome\.get) - reject-dict
+^https?:\/\/nr-op\.elemecdn\.com\/eleme\/transformer\/templates\/\w_eleme_home_yolo_popup - reject
+^https?:\/\/amdc\.m\.ele\.me\/amdc\/mobileDispatch - reject-dict
+^https?:\/\/g\.alicdn\.com\/TBTakeout\/et-store\/(?:\d+\.)*\/weex\/store-brand-popup - reject-dict
+^https?:\/\/(?:nr-op|cube)\.elemecdn\.com\/image\/.*\.(?:png|jpeg|jpg|gif)\?x-oss-process=image\/resize,m_fill,w_180,h_180\/(?:$|format,webp\/$) - reject-img
+^https?:\/\/fuss10\.elemecdn\.com\/.+\/w\/(?:640|750)\/h\/\d{3,4} - reject-img
+^https?:\/\/cube\.elemecdn\.com\/[\w\/]+\.jpeg\?x-oss-process=image\/resize,m_fill,w_1\d{3},h_2\d{3}\/format,webp\/ - reject-img
+^https?:\/\/cube\.elemecdn\.com\/[\w\/]+\.jpeg\?x-oss-process=image\/resize,m_fill,w_6\d{2},h_8\d{2}\/format,webp\/ - reject-img
+^https?:\/\/cube\.elemecdn\.com\/[\w\/]+\.jpeg\?x-oss-process=image\/resize,m_fill,w_\d{3},h_\d{4}\/format,webp\/ - reject-img
+^https?:\/\/(?:nr-op|cube)\.elemecdn\.com\/.+\.jpeg\?x-oss-process=image\/resize,m_fill,w_\d{4,},h_\d{4,}\/(?:$|format,webp\/$) - reject-img
+^https?:\/\/(?:shopping\.ele\.me\/(?:gw|h5)|acs\.m\.taobao\.com\/gw)\/mtop\.o2o\.ad\.exposure\.get - reject-dict
+^https?:\/\/(?:waimai-guide\.ele\.me\/(?:gw|h5)|acs\.m\.taobao\.com\/gw)\/mtop\.alsc\.upp\.tbet\.send - reject-dict
+^https?:\/\/(?:waimai-guide\.ele\.me\/(?:gw|h5)|acs\.m\.taobao\.com\/gw)\/mtop\.alsc\.eleme\.trigger\.respond - reject-dict
+^https?:\/\/(?:waimai-guide\.ele\.me\/h5|acs\.m\.taobao\.com\/gw)\/mtop\.alsc\.interact\.content\.homepage\.float - reject-dict
+^https?:\/\/(?:waimai-guide\.ele\.me\/h5|acs\.m\.taobao\.com\/gw)\/mtop\.ele\.growth\.fission\.client\.etmd\.et\.getmainpageicon - reject-dict
+^https?:\/\/interface\d?\.music\.163\.com\/w?e?api\/(?:ad|ocpc\/ad)(?:\/|$) - reject-dict
+^https?:\/\/interface\d?\.music\.163\.com\/w?e?api\/(?:side-bar\/mini-program\/music-service\/account|delivery\/(?:batch-deliver|deliver)|moment\/tab\/info\/get|yunbei\/account\/entrance\/get) - reject-dict
+^https?:\/\/interface\d?\.music\.163\.com\/w?e?api\/(?:search\/(?:chart|default|rcmd\/keyword|specialkeyword)|resource-exposure\/|activity\/bonus\/playpage\/time\/query) - reject-dict
+^https?:\/\/interface\d?\.music\.163\.com\/w?e?api\/(?:comment\/feed\/inserted|hotcomment\/collect|tips\/v\d\/get|mlivestream\/entrance\/playpage|link\/(?:position\/show\/strategy|scene\/show)|v\d\/content\/exposure\/comment\/banner) - reject-dict
+^https?:\/\/interface\d?\.music\.163\.com\/w?e?api\/(?:resource\/comments?\/musiciansaid|community\/friends\/fans-group\/artist\/group\/get|music\/songshare\/text\/recommend\/get|mine\/applet\/redpoint|resniche\/position\/play\/new\/get) - reject-dict
+^https?:\/\/bootpreload\.uve\.weibo\.com\/v1\/ad\/preload$ - reject-dict
+^https?:\/\/api\.weibo\.cn\/2\/ad\/ - reject-dict
+^https?:\/\/h5\.m\.goofish\.com\/app\/idleFish-F2e\/idlefish-pop - reject
+^https?:\/\/dinamicx\.alibabausercontent\.com\/pub\/fish_home_top_kingkong_new\/ - reject
+^https?:\/\/g\.alicdn\.com\/IdleFish-F2e\/idlefish-workers\/[0-9.]+\/smartLoader - reject
+^https?:\/\/h5\.m\.goofish\.com\/wow\/moyu\/moyu-project\/idle-xy-seller-home\/pages\/dress-pop - reject-dict
+^https?:\/\/(?:g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.wireless\.home\.xianyu(?:\.my)?\.awesome\.get - reject-dict
+^https?:\/\/(?:g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.live\.home\.ads\.material\.get - reject-dict
+^https?:\/\/(?:g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.user\.strategy\. - reject-dict
+^https?:\/\/(?:g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.topic\.banner\/ - reject-dict
+^https?:\/\/(?:g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.item\.resell\.recommendorhotcate - reject-dict
+^https?:\/\/(?:g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlecommerce\.splash - reject-dict
+^https?:\/\/(?:g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlehome\.idle\.coin\.nextfresh\/ - reject-dict
+^https?:\/\/(?:g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.item\.search\.activate\/ - reject-dict
+^https?:\/\/(?:g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\.(?:discover|shade)\/ - reject-dict
+^https?:\/\/mediacloud\.xiaohongshu\.com\/api\/httpdns\/dns\?host - reject-dict
+^https?:\/\/www\.xiaohongshu\.com\/api\/sns\/v\d+\/(?:ads\/resource|hey\/\w+\/hey_gallery) - reject-dict
+^https?:\/\/(?:client\.)?app(?:\.coc)?\.10086\.cn\/biz-orange\/DN\/init\/startInit - reject-dict
+^https?:\/\/(?:client\.)?app(?:\.coc)?\.10086\.cn\/biz-orange\/DN\/explorePage\/getAdverList - reject-dict
+^https?:\/\/(?:client\.)?app(?:\.coc)?\.10086\.cn\/biz-orange\/DN\/emotionMarket - reject-dict
+^https?:\/\/m\.client\.10010\.com\/mobileService\/(?:activity|customer)\/(?:get_client_adv|get_startadv) - reject-dict
+^https?:\/\/m\.client\.10010\.com\/mobileService\/customer\/getclientconfig\.htm - reject-dict
+^https?:\/\/m\.client\.10010\.com\/uniAdmsInterface\/(?:getHomePageAd|getWelcomeAd) - reject-dict
+^https?:\/\/res\.mall\.10010\.cn\/mall\/common\/js\/fa\.js\?referer= - reject-img
+^https?:\/\/www\.zhihu\.com\/appview\/v\d\/zhmore - reject-dict
+^https?:\/\/api\.zhihu\.com\/appview\/api\/v\d\/answers\/\d+\/recommendations - reject-dict
+^https?:\/\/api\.zhihu\.com\/\w+\/\d+\/comments\/featured-comment-ad - reject-dict
+^https?:\/\/www\.zhihu\.com\/commercial_api\/banners_v\d\/mobile_banner - reject-dict
+^https?:\/\/zhuanlan\.zhihu\.com\/api\/articles\/\d+\/recommendation - reject-dict
+^https?:\/\/zhstatic\.zhihu\.com\/brand-ad - reject
+^https?:\/\/api\.zhihu\.com\/commercial_api\/(?:banners_v\d\/app_topstory_banner|launch_v|real_time_launch_v) - reject-dict
+^https?:\/\/api\.zhihu\.com\/(?:moments\/lastread|drama\/hot-drama-list|root\/window|me\/guides) - reject-dict
+^https?:\/\/www\.zhihu\.com\/api\/v\d\/search\/related_queries\/(?:answer|article)\/\d+ - reject-dict
+^https?:\/\/h5\.smzdm\.com\/user\/coupon\/coupon_list\? - reject-dict
+^https?:\/\/haojia\.m\.smzdm\.com\/detail_modul\/other_modul\? - reject-dict
+^https?:\/\/app-api\.smzdm\.com\/util\/loading\? - reject-dict
+^https?:\/\/app-api\.smzdm\.com\/mychannel\/list$ - reject-dict
+^https?:\/\/user-api\.smzdm\.com\/vip\/bottom_card_list\? - reject-dict
+^https?:\/\/article-api\.smzdm\.com\/publish\/get_bubble\? - reject-dict
+^https?:\/\/s-api\.smzdm\.com\/sou\/(?:search_default_keyword|popup_coupon)\? - reject-dict
+^https?:\/\/api\.(?:pinduoduo|yangkeduo)\.com\/api\/cappuccino\/splash - reject-dict
+^https?:\/\/api\.pinduoduo\.com\/api\/ktt_gateway\/activity\/feeds\/personal_home_page\/ - reject-dict
+^https?:\/\/api\.pinduoduo\.com\/api\/alexa\/goods\/back_up - reject-dict
+^https?:\/\/api\.pinduoduo\.com\/api\/(?:aquarius\/hungary\/global\/app_popup|flow\/hungary\/window\/global) - reject-dict
+^https?:\/\/api\.pinduoduo\.com\/search_hotquery - reject-dict
+^https?:\/\/api\.pinduoduo\.com\/api\/zaire_biz\/chat\/resource\/get_list_data - reject-dict
+^https?:\/\/api\.pinduoduo\.com\/api\/brand-olay\/goods_detail\/bybt_guide - reject-dict
+^https?:\/\/api\.pinduoduo\.com\/api\/engels\/reviews\/require\/append - reject-dict
+^https?:\/\/api\.pinduoduo\.com\/api\/caterham\/v\d\/query\/(?:my_order_group|likes|personal|new_chat_group) - reject-dict
+^https?:\/\/api\.yangkeduo\.com\/api\/ant\/entry\/navigate - reject-dict
+^https?:\/\/api\.pinduoduo\.com\/api\/(?:barrow\/query|pdd_live_moore_main_lego) - reject-dict
 
 [Body Rewrite]
 http-response-jq ^https:\/\/api\.bilibili\.com\/x\/pd-proxy\/tracker\? '.data[][]?="stun.chat.bilibili.com:3478"'
@@ -3346,4 +3526,4 @@ http-response-jq http:\/\/.+\.gamersky.com/.+/lists/getListElements '.listElemen
 http-response-jq ^https?:\/\/portal\.zjzwfw\.gov\.cn\/app_api\/appHome\/selectStartPic 'if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end'
 
 [MITM]
-hostname = %APPEND% acs.m.taobao.com,guide-acs.m.taobao.com,-i.vip.iqiyi.com,*.iqiyi.com,manga.bilibili.com,grpc.biliapi.net,app.bilibili.com,api.bilibili.com,api.live.bilibili.com,amdc.m.taobao.com,p.meituan.com,rms.meituan.com,optimus-ads.amap.com,amap-aos-info-nogw.amap.com,api.m.jd.com,dns.jd.com,bdsp-x.jd.com,dsp-x.jd.com,ms.jr.jd.com,appconf.mail.163.com,support.you.163.com,jdread-api.jd.com,cdb.meituan.com,peisongapi.meituan.com,ipv4.music.163.com,interface.music.163.com,interface3.music.163.com,interface9.music.163.com,app-conf.ds.163.com,nex.163.com,g1.163.com,client.mail.163.com,c.m.163.com,p.du.163.com,m.you.163.com,acs.m.goofish.com,g-acs.m.goofish.com,portal-portm.meituan.com,mall.meituan.com,edith.xiaohongshu.com,www.xiaohongshu.com,ci.xiaohongshu.com,rec.xiaohongshu.com,so.xiaohongshu.com,api.zhihu.com,www.zhihu.com,appcloud2.zhihu.com,m-cloud.zhihu.com,zhuanlan.zhihu.com,link.zhihu.com,*.cupid.iqiyi.com,wmapi.meituan.com
+hostname = %APPEND% acs.m.taobao.com,guide-acs.m.taobao.com,-i.vip.iqiyi.com,*.iqiyi.com,manga.bilibili.com,grpc.biliapi.net,app.bilibili.com,api.bilibili.com,api.live.bilibili.com,amdc.m.taobao.com,p.meituan.com,rms.meituan.com,optimus-ads.amap.com,amap-aos-info-nogw.amap.com,api.m.jd.com,dns.jd.com,bdsp-x.jd.com,dsp-x.jd.com,ms.jr.jd.com,appconf.mail.163.com,support.you.163.com,jdread-api.jd.com,cdb.meituan.com,peisongapi.meituan.com,ipv4.music.163.com,interface.music.163.com,interface3.music.163.com,interface9.music.163.com,app-conf.ds.163.com,nex.163.com,g1.163.com,client.mail.163.com,c.m.163.com,p.du.163.com,m.you.163.com,acs.m.goofish.com,g-acs.m.goofish.com,portal-portm.meituan.com,mall.meituan.com,edith.xiaohongshu.com,www.xiaohongshu.com,ci.xiaohongshu.com,rec.xiaohongshu.com,so.xiaohongshu.com,api.zhihu.com,www.zhihu.com,appcloud2.zhihu.com,m-cloud.zhihu.com,zhuanlan.zhihu.com,link.zhihu.com,*.cupid.iqiyi.com,wmapi.meituan.com,oss.amap.com,sns.amap.com,storage.jd.com,apimobile.meituan.com,sqt.meituan.com,bootpreload.uve.weibo.com,api.weibo.cn,h5.m.goofish.com,mediacloud.xiaohongshu.com,zhstatic.zhihu.com
