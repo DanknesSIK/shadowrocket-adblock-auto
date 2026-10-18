@@ -63,7 +63,7 @@ hostname = %APPEND% api.zhihu.com,qq.com,*.openai.com
         self.assertTrue(accepts("Script", good, cfg, "letswish-curated"))
         self.assertFalse(accepts("Script", good, cfg, "fmz200-allapps"))
         self.assertFalse(accepts("Script", good.replace("zhihu.js", "unknown.js"), cfg, "letswish-curated"))
-        self.assertFalse(accepts("Script", good.replace("api\\.zhihu\\.com", "pay\\.alipay\\.com"),
+        self.assertFalse(accepts("Script", good.replace(r"api\\.zhihu\\.com", r"pay\\.alipay\\.com"),
                                  cfg, "letswish-curated"))
         self.assertFalse(accepts("Script", good.replace("http-response", "http-request"),
                                  cfg, "letswish-curated"))
