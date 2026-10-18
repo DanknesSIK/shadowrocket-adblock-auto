@@ -1,0 +1,61 @@
+{
+  "sources_enabled": 4,
+  "total_rules": 3336,
+  "mitm_hosts": 52,
+  "bytes": 166809,
+  "sha256": "8da9ad86e654180663b7c5ded861725958c1a58fa2bbe997a13c384c66b4e680",
+  "remote_js_enabled": false,
+  "warning": "Upstream rules and native rewrites are third party and have not been audited or device-tested.",
+  "sources": [
+    {
+      "id": "fmz200-allapps",
+      "url": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/Shadowrocket/module/blockAds.srmodule",
+      "sha256": "513e9c5a5d6199d12df9720d743422b1581bdca9473f18c352b1e8edd36bd07f",
+      "unknown_lines": 0,
+      "counts": {
+        "Rule": 2712,
+        "duplicate": 160,
+        "filtered": 134,
+        "disabled": 1016,
+        "URL Rewrite": 494,
+        "Body Rewrite": 71
+      }
+    },
+    {
+      "id": "blackmatrix7-advertising",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Shadowrocket/AdvertisingScript/AdvertisingScript.sgmodule",
+      "sha256": "34ff65de2e1e4ff2dda90c1ebb94e3e8f716ffe17cec917ff6a70fca6b39c55d",
+      "unknown_lines": 0,
+      "counts": {
+        "duplicate": 5,
+        "Rule": 4,
+        "URL Rewrite": 11,
+        "disabled": 26
+      }
+    },
+    {
+      "id": "semomanli-zhihu",
+      "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E7%9F%A5%E4%B9%8E.sgmodule",
+      "sha256": "7f35fce34a756067662b6e380850b75c8a2bc78cd700affc510e9bd839a94465",
+      "unknown_lines": 0,
+      "counts": {
+        "Rule": 10,
+        "URL Rewrite": 22,
+        "duplicate": 1,
+        "filtered": 2,
+        "disabled": 8
+      }
+    },
+    {
+      "id": "semomanli-xiaohongshu",
+      "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E5%B0%8F%E7%BA%A2%E4%B9%A6.sgmodule",
+      "sha256": "e7f98e211bb41f65994086b592847c032d4d4d1dac2077081a08cd369b2f4d87",
+      "unknown_lines": 0,
+      "counts": {
+        "Rule": 5,
+        "URL Rewrite": 7,
+        "disabled": 12
+      }
+    }
+  ]
+}
