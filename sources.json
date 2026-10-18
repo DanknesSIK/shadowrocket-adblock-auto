@@ -1,13 +1,13 @@
 {
   "settings": {
     "name": "Shadowrocket AdBlock Auto | 多仓库去广告",
-    "description": "多仓库定时同步，默认禁用远程脚本，谨慎使用",
+    "description": "多仓库去广告｜允许指定第三方响应脚本｜每日自动构建",
     "include_rules": true,
     "include_url_rewrite": true,
     "include_body_rewrite": true,
     "include_header_rewrite": false,
     "include_map_local": false,
-    "include_remote_scripts": false,
+    "include_remote_scripts": true,
     "mitm_selected_suffixes": [
       "zhihu.com",
       "bilibili.com",
@@ -56,7 +56,32 @@
     ],
     "max_source_bytes": 1500000,
     "max_output_bytes": 1150000,
-    "min_output_rules": 15
+    "min_output_rules": 15,
+    "trusted_script_source_ids": [
+      "letswish-curated"
+    ],
+    "approved_script_files": {
+      "zhihu.js": [
+        "zhihu.com"
+      ],
+      "xiaohongshu.js": [
+        "xiaohongshu.com"
+      ],
+      "weibo.js": [
+        "weibo.cn"
+      ],
+      "bilibiliJson.js": [
+        "bilibili.com",
+        "biliapi.net",
+        "biliapi.com"
+      ],
+      "amap.js": [
+        "amap.com"
+      ],
+      "goofish.js": [
+        "goofish.com"
+      ]
+    }
   },
   "sources": [
     {
@@ -64,7 +89,7 @@
       "url": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/Shadowrocket/module/blockAds.srmodule",
       "format": "shadowrocket",
       "enabled": true,
-      "description": "大型合集，默认禁止 JS"
+      "description": "全 App 域名和原生重写；未允许其 JS"
     },
     {
       "id": "blackmatrix7-advertising",
@@ -78,14 +103,14 @@
       "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E7%9F%A5%E4%B9%8E.sgmodule",
       "format": "shadowrocket",
       "enabled": true,
-      "description": "知乎专用规则（不含脚本）"
+      "description": "知乎独立规则；其老旧 JS 自动过滤"
     },
     {
       "id": "semomanli-xiaohongshu",
       "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E5%B0%8F%E7%BA%A2%E4%B9%A6.sgmodule",
       "format": "shadowrocket",
       "enabled": true,
-      "description": "小红书专用规则"
+      "description": "小红书独立规则；其老旧 JS 自动过滤"
     },
     {
       "id": "semomanli-bilibili",
@@ -149,6 +174,13 @@
       "format": "shadowrocket",
       "enabled": false,
       "description": "旧融合模块；权限/授权和冲突需核实"
+    },
+    {
+      "id": "letswish-curated",
+      "url": "https://raw.githubusercontent.com/letswish/Shadowrocket-Module/main/All-in-One-AdBlock.sgmodule",
+      "format": "shadowrocket",
+      "enabled": true,
+      "description": "15 App 精选规则；仅允许指定 R-Store 广告响应脚本"
     }
   ]
 }
