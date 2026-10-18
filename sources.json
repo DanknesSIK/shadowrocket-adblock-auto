@@ -1,0 +1,154 @@
+{
+  "settings": {
+    "name": "Shadowrocket AdBlock Auto | 多仓库去广告",
+    "description": "多仓库定时同步，默认禁用远程脚本，谨慎使用",
+    "include_rules": true,
+    "include_url_rewrite": true,
+    "include_body_rewrite": true,
+    "include_header_rewrite": false,
+    "include_map_local": false,
+    "include_remote_scripts": false,
+    "mitm_selected_suffixes": [
+      "zhihu.com",
+      "bilibili.com",
+      "biliapi.net",
+      "biliapi.com",
+      "xiaohongshu.com",
+      "xhscdn.com",
+      "weibo.com",
+      "weibo.cn",
+      "amap.com",
+      "goofish.com",
+      "taobao.com",
+      "jd.com",
+      "meituan.com",
+      "163.com",
+      "iqiyi.com"
+    ],
+    "protected_domain_suffixes": [
+      "alipay.com",
+      "alipayobjects.com",
+      "tenpay.com",
+      "weixin.qq.com",
+      "wechat.com",
+      "qq.com",
+      "95516.com",
+      "unionpay.com",
+      "icbc.com.cn",
+      "ccb.com",
+      "abchina.com",
+      "boc.cn",
+      "bankcomm.com",
+      "cmbchina.com",
+      "chatgpt.com",
+      "openai.com",
+      "oaistatic.com",
+      "oaiusercontent.com",
+      "t.me",
+      "telegram.org",
+      "telegram.me",
+      "synology.com",
+      "quickconnect.to",
+      "apple.com",
+      "icloud.com",
+      "github.com",
+      "githubusercontent.com"
+    ],
+    "max_source_bytes": 1500000,
+    "max_output_bytes": 1150000,
+    "min_output_rules": 15
+  },
+  "sources": [
+    {
+      "id": "fmz200-allapps",
+      "url": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/Shadowrocket/module/blockAds.srmodule",
+      "format": "shadowrocket",
+      "enabled": true,
+      "description": "大型合集，默认禁止 JS"
+    },
+    {
+      "id": "blackmatrix7-advertising",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Shadowrocket/AdvertisingScript/AdvertisingScript.sgmodule",
+      "format": "shadowrocket",
+      "enabled": true,
+      "description": "补充 URL 重写"
+    },
+    {
+      "id": "semomanli-zhihu",
+      "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E7%9F%A5%E4%B9%8E.sgmodule",
+      "format": "shadowrocket",
+      "enabled": true,
+      "description": "知乎专用规则（不含脚本）"
+    },
+    {
+      "id": "semomanli-xiaohongshu",
+      "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E5%B0%8F%E7%BA%A2%E4%B9%A6.sgmodule",
+      "format": "shadowrocket",
+      "enabled": true,
+      "description": "小红书专用规则"
+    },
+    {
+      "id": "semomanli-bilibili",
+      "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9.sgmodule",
+      "format": "shadowrocket",
+      "enabled": false,
+      "description": "独立模块待实机测试"
+    },
+    {
+      "id": "semomanli-taobao",
+      "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E6%B7%98%E5%AE%9D.sgmodule",
+      "format": "shadowrocket",
+      "enabled": false,
+      "description": "涉及交易应用，谨慎启用"
+    },
+    {
+      "id": "semomanli-goofish",
+      "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E9%97%B2%E9%B1%BC.sgmodule",
+      "format": "shadowrocket",
+      "enabled": false,
+      "description": "部分推荐流可能误拦"
+    },
+    {
+      "id": "semomanli-amap",
+      "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE.sgmodule",
+      "format": "shadowrocket",
+      "enabled": false,
+      "description": "导航应用需单独测试"
+    },
+    {
+      "id": "semomanli-jd",
+      "url": "https://raw.githubusercontent.com/semomanli/Shadowrocket/main/Release/Modules/%E4%BA%AC%E4%B8%9C.sgmodule",
+      "format": "shadowrocket",
+      "enabled": false,
+      "description": "交易应用需谨慎测试"
+    },
+    {
+      "id": "fmz200-weibo",
+      "url": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/Shadowrocket/module/weibo.srmodule",
+      "format": "shadowrocket",
+      "enabled": false,
+      "description": "与合集可能重复"
+    },
+    {
+      "id": "ddgksf2013-weibo",
+      "url": "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/WeiboAds.conf",
+      "format": "qx-basic",
+      "enabled": false,
+      "description": "仅导入兼容 URL reject 的规则"
+    },
+    {
+      "id": "ddgksf2013-amap",
+      "url": "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/AmapAds.conf",
+      "format": "qx-basic",
+      "enabled": false,
+      "description": "仅导入兼容 URL reject 的规则"
+    },
+    {
+      "id": "wmsxwd-fusion",
+      "url": "https://raw.githubusercontent.com/wmsxwd/Shadowrocket/main/Module.sgmodule",
+      "format": "shadowrocket",
+      "enabled": false,
+      "description": "旧融合模块；权限/授权和冲突需核实"
+    }
+  ]
+}
