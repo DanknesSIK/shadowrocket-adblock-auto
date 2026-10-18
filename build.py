@@ -85,9 +85,38 @@ def parse_qx(text):
     return parsed, unknown
 
 
-def accepts(section, line, cfg):
+def approved_script(line, cfg, source_id):
+    """Only allow reviewed script URLs from the curated module, for response filtering."""
+    if not cfg.get("include_remote_scripts"):
+        return False
+    if source_id not in cfg.get("trusted_script_source_ids", []):
+        return False
     if len(line) > 15000:
         return False
+    if not re.search(r"\\btype\\s*=\\s*http-response\\b", line, re.I):
+        return False
+    script_url = re.search(r"(?:^|,)\\s*script-path\\s*=\\s*(https://[^,\\s]+)", line, re.I)
+    target = re.search(r"(?:^|,)\\s*pattern\\s*=\\s*([^,]+)", line, re.I)
+    if not script_url or not target:
+        return False
+    path_prefix = "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/"
+    if not script_url.group(1).startswith(path_prefix):
+        return False
+    filename = script_url.group(1)[len(path_prefix):]
+    allowed_domains = cfg.get("approved_script_files", {}).get(filename)
+    if not allowed_domains or "/" in filename or not filename.endswith(".js"):
+        return False
+    normalized_pattern = target.group(1).lower().replace("\\\\", "")
+    if protected(target.group(1), cfg["protected_domain_suffixes"]):
+        return False
+    return any(domain in normalized_pattern for domain in allowed_domains)
+
+
+def accepts(section, line, cfg, source_id=None):
+    if len(line) > 15000:
+        return False
+    if section == "Script":
+        return approved_script(line, cfg, source_id)
     if protected(line, cfg["protected_domain_suffixes"]):
         return False
     if re.search(r"\b(ca-p12|ca-passphrase|password|authorization|set-cookie|cookie)\b", line, re.I):
@@ -102,9 +131,6 @@ def accepts(section, line, cfg):
         return bool(cfg.get("include_header_rewrite"))
     if section == "Map Local":
         return bool(cfg.get("include_map_local"))
-    if section == "Script":
-        # Do not let a future upstream change enable executable JavaScript.
-        return False
     return False
 
 
@@ -154,7 +180,7 @@ def assemble(conf, downloaded):
                 stats["disabled"] += len(lines)
                 continue
             for line in lines:
-                if not accepts(section, line, cfg):
+                if not accepts(section, line, cfg, source["id"]):
                     stats["filtered"] += 1
                     continue
                 normalized = re.sub(r"\s+", " ", line).strip()
@@ -171,7 +197,7 @@ def assemble(conf, downloaded):
     hosts = list(dict.fromkeys(all_hosts))
     lines = ["#!name=" + cfg["name"], "#!desc=" + cfg["description"],
              "#!author=Shadowrocket AdBlock Auto (sources credited in README)",
-             "# Remote JavaScript is disabled. This is not an advertisement blocking guarantee.", ""]
+             "# Approved third-party scripts may process decrypted App responses. Review source risks.", ""]
     for section in SECTIONS:
         if combined[section]:
             lines.extend(["[" + section + "]", *combined[section], ""])
@@ -186,8 +212,14 @@ def assemble(conf, downloaded):
         "sources_enabled": len(enabled), "total_rules": total,
         "mitm_hosts": len(hosts), "bytes": output_len,
         "sha256": digest(output.encode("utf-8")),
-        "remote_js_enabled": False,
-        "warning": "Upstream rules and native rewrites are third party and have not been audited or device-tested.",
+        "remote_js_enabled": bool(combined["Script"]),
+        "enabled_script_count": len(combined["Script"]),
+        "script_urls": list(dict.fromkeys(
+            re.search(r"script-path=(https://[^,\\s]+)", line).group(1)
+            for line in combined["Script"]
+            if re.search(r"script-path=(https://[^,\\s]+)", line)
+        )),
+        "warning": "Third-party scripts access decrypted App responses; their content can change upstream. Rules are not device-tested.",
         "sources": report_sources
     }
     return output, report
