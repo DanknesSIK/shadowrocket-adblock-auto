@@ -2,10 +2,12 @@
   "sources_enabled": 5,
   "total_rules": 3516,
   "mitm_hosts": 62,
-  "bytes": 180555,
-  "sha256": "f69ce72d68ab9bf63f2e25b272670f01ac8142353a8fa8883edea45fe25f17e5",
+  "bytes": 180562,
+  "sha256": "e5cf0c2e83e9f6c9929c2f72ebb151f3a1f852fa716526a0386e10802eac2f36",
   "remote_js_enabled": false,
-  "warning": "Upstream rules and native rewrites are third party and have not been audited or device-tested.",
+  "enabled_script_count": 0,
+  "script_urls": [],
+  "warning": "Third-party scripts access decrypted App responses; their content can change upstream. Rules are not device-tested.",
   "sources": [
     {
       "id": "fmz200-allapps",

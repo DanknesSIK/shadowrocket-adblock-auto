@@ -1,7 +1,7 @@
 #!name=Shadowrocket AdBlock Auto | 多仓库去广告
 #!desc=多仓库去广告｜允许指定第三方响应脚本｜每日自动构建
 #!author=Shadowrocket AdBlock Auto (sources credited in README)
-# Remote JavaScript is disabled. This is not an advertisement blocking guarantee.
+# Approved third-party scripts may process decrypted App responses. Review source risks.
 
 [Rule]
 DOMAIN-SUFFIX,miaozhen.com,REJECT
