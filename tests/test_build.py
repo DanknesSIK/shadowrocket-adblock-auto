@@ -50,5 +50,25 @@ hostname = %APPEND% api.zhihu.com,qq.com,*.openai.com
         self.assertNotIn("qq.com", module)
         self.assertEqual(report["total_rules"], 2)
 
+
+    def test_explicit_third_party_script_whitelist(self):
+        cfg = {
+            "include_remote_scripts": True,
+            "trusted_script_source_ids": ["letswish-curated"],
+            "approved_script_files": {"zhihu.js": ["zhihu.com"]},
+            "protected_domain_suffixes": ["openai.com", "alipay.com", "qq.com"],
+        }
+        good = (r"zhihu_feed = type=http-response,pattern=^https?:\\/\\/api\\.zhihu\\.com\\/topstory\\/recommend,"
+                "requires-body=1,script-path=https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/zhihu.js")
+        self.assertTrue(accepts("Script", good, cfg, "letswish-curated"))
+        self.assertFalse(accepts("Script", good, cfg, "fmz200-allapps"))
+        self.assertFalse(accepts("Script", good.replace("zhihu.js", "unknown.js"), cfg, "letswish-curated"))
+        self.assertFalse(accepts("Script", good.replace("api\\.zhihu\\.com", "pay\\.alipay\\.com"),
+                                 cfg, "letswish-curated"))
+        self.assertFalse(accepts("Script", good.replace("http-response", "http-request"),
+                                 cfg, "letswish-curated"))
+        cfg["include_remote_scripts"] = False
+        self.assertFalse(accepts("Script", good, cfg, "letswish-curated"))
+
 if __name__ == "__main__":
     unittest.main()
