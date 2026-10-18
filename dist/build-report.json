@@ -1,12 +1,19 @@
 {
   "sources_enabled": 5,
-  "total_rules": 3516,
+  "total_rules": 3535,
   "mitm_hosts": 62,
-  "bytes": 180562,
-  "sha256": "e5cf0c2e83e9f6c9929c2f72ebb151f3a1f852fa716526a0386e10802eac2f36",
-  "remote_js_enabled": false,
-  "enabled_script_count": 0,
-  "script_urls": [],
+  "bytes": 185929,
+  "sha256": "94840f397befff20eb1ae5321232429473da129ee3d3ec155502d4c8f3a0cb71",
+  "remote_js_enabled": true,
+  "enabled_script_count": 19,
+  "script_urls": [
+    "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/bilibiliJson.js",
+    "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/amap.js",
+    "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/weibo.js",
+    "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/goofish.js",
+    "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/xiaohongshu.js",
+    "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/zhihu.js"
+  ],
   "warning": "Third-party scripts access decrypted App responses; their content can change upstream. Rules are not device-tested.",
   "sources": [
     {
@@ -67,7 +74,8 @@
         "Rule": 70,
         "duplicate": 74,
         "URL Rewrite": 110,
-        "filtered": 32
+        "filtered": 13,
+        "Script": 19
       }
     }
   ]
