@@ -19,7 +19,7 @@
     {
       "id": "fmz200-allapps",
       "url": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/Shadowrocket/module/blockAds.srmodule",
-      "sha256": "513e9c5a5d6199d12df9720d743422b1581bdca9473f18c352b1e8edd36bd07f",
+      "sha256": "5ac88c9238d7f3fc9066b0c6f4252fb008027f4fe014d45910837a75781c4de7",
       "unknown_lines": 0,
       "counts": {
         "Rule": 2712,
