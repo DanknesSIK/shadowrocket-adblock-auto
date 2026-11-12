@@ -837,6 +837,9 @@ DOMAIN-SUFFIX,mindmanager.cn,REJECT
 DOMAIN-SUFFIX,officesoftcn.com,REJECT
 DOMAIN-SUFFIX,photozoomchina.com,REJECT
 DOMAIN-SUFFIX,xitongqingli.com,REJECT
+DOMAIN-SUFFIX,apollo.caixin.com,REJECT
+DOMAIN-SUFFIX,logstat.caixin.com,REJECT
+DOMAIN-SUFFIX,promote.caixin.com,REJECT
 DOMAIN,dispatcher.360in.com,REJECT
 DOMAIN,ad.360in.com,REJECT
 DOMAIN,exp.360in.com,REJECT
@@ -851,6 +854,11 @@ DOMAIN-SUFFIX,gdyn.cnn.com,REJECT
 DOMAIN-SUFFIX,metrics.cnn.com,REJECT
 DOMAIN-SUFFIX,cnn.dyn.cnn.com,REJECT
 DOMAIN-SUFFIX,i.l.cnn.net,REJECT
+DOMAIN-SUFFIX,ad.csdn.net,REJECT
+DOMAIN-SUFFIX,counter.csdn.net,REJECT
+DOMAIN-SUFFIX,dc.csdn.net,REJECT
+DOMAIN-SUFFIX,dc2.csdn.net,REJECT
+DOMAIN-SUFFIX,medal.blog.csdn.net,REJECT
 DOMAIN-SUFFIX,a.dangdang.com,REJECT
 DOMAIN-SUFFIX,schprompt.dangdang.com,REJECT
 DOMAIN-SUFFIX,t.dangdang.com,REJECT
@@ -2876,6 +2884,9 @@ http:\/\/ad\.myfriday\.cn\/d\/json\/1\.1 - reject
 ^https?:\/\/cdn\.\w{3}\.chelaileapp\.cn\/(api\/)?adpub - reject
 ^https?:\/\/app\.hbooker\.com\/setting\/get_startpage_url_list - reject
 ^https?:\/\/js-ad\.ayximgs\.com\.ad-universe-cdn\.hzhcbkj\.cn\/xgapp\.php\/v2\/top_notice - reject
+^https?:\/\/app-gw\.csdn\.net\/silkroad-api\/api\/v\d\/assemble\/list\/pub\/channel\/app_open_screen_ad - reject
+^https?:\/\/app-gw\.csdn\.net\/abtesting\/v2\/getList? - reject
+^https?:\/\/gw\.csdn\.net\/cms-app\/v\d+\/home_page\/open_advertisement - reject
 ^https?:\/\/amdc\.m\.taobao\.com\/amdc\/mobileDispatch\?appkey=23782110 - reject
 ^https?:\/\/e\.dangdang\.com\/media\/api.+\?action=getDeviceStartPage - reject
 ^https?:\/\/e\.dangdang\.com\/.+?getDeviceStartPage - reject
