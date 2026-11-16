@@ -4,9 +4,13 @@
 
 新增适合日常使用的 [FengGe.conf](profiles/FengGe.conf)：完整代理分组、国内直连、AI/视频独立分流、轻量广告域名拦截与内置 Tailscale 域名分流。默认关闭 HTTPS 解密，不加载脚本。节点仍由首页订阅管理。
 
+v1.1 增加每日检查后发布：北京时间 08:47 检查上游，验证通过后更新主配置中的固定规则版本；失败时保留现有版本。主配置安装地址不变。GitHub 和手机后台任务都可能延迟。
+
 - [安装与分流说明](profiles/README.md)
 - [配置直链](https://raw.githubusercontent.com/DanknesSIK/shadowrocket-adblock-auto/main/profiles/FengGe.conf)
 - [静态验证与远程来源报告](profiles/validation-report.json)
+- [主配置每日更新状态](../../actions/workflows/profile.yml)
+- [应急配置直链](https://raw.githubusercontent.com/DanknesSIK/shadowrocket-adblock-auto/main/profiles/FengGe-Emergency.conf)（需提前下载；无远程规则、无广告拦截、无自动测速；不访问远程 Tailscale）
 
 初次使用该主配置时，停用旧分流/广告模块，包括下方的 `AllApps-Auto.sgmodule`。报告不代表 iPhone 实机测试。
 

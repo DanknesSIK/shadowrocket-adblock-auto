@@ -19,6 +19,8 @@ PROFILE = ROOT / "profiles/FengGe.conf"
 BUILTINS = {"PROXY", "DIRECT", "REJECT", "TAILSCALE"}
 RULE_TYPES = {"DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "DOMAIN-WILDCARD",
               "USER-AGENT", "URL-REGEX", "IP-CIDR", "IP-CIDR6", "IP-ASN", "GEOIP"}
+SOURCE_PREFIX = "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/"
+SOURCE_PATTERN = re.compile(re.escape(SOURCE_PREFIX) + r"([0-9a-f]{40})/(rule/Shadowrocket/[A-Za-z0-9_]+/[A-Za-z0-9_]+\.list)")
 
 
 def require(condition, message):
@@ -104,9 +106,10 @@ def check_profile(raw):
 
 
 def fetch(url):
-    require(url.startswith("https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/"), "Unapproved rule source " + url)
+    require(SOURCE_PATTERN.fullmatch(url), "Unpinned or unapproved rule source " + url)
     request = urllib.request.Request(url, headers={"User-Agent": "FengGe-Profile-Validator/1.0"})
     with urllib.request.urlopen(request, timeout=35) as response:
+        require(response.geturl() == url, "Unexpected rule source redirect")
         data = response.read(4_000_001)
         status = response.status
     require(status == 200 and len(data) < 4_000_001, "Invalid response size/status")
@@ -119,6 +122,9 @@ def expand(rules):
     refs = [r for r in rules if r[0] in {"RULE-SET", "DOMAIN-SET"}]
     urls = [r[1] for r in refs]
     require(len(urls) == len(set(urls)), "Repeated remote URL")
+    require(all(SOURCE_PATTERN.fullmatch(u) for u in urls), "Unpinned remote reference")
+    require(len({SOURCE_PATTERN.fullmatch(u).group(1) for u in urls}) == 1,
+            "Mixed upstream revisions")
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
         fetched = dict(zip(urls, pool.map(fetch, urls)))
     expanded, sources = [], []
@@ -147,7 +153,7 @@ def expand(rules):
     return expanded, sources
 
 
-def route(rules, host="", ip=None, country=None):
+def route(rules, host="", ip=None, country=None, asn=None):
     """Domain/IP samples only. Does not look up real DNS, ASN or GeoIP."""
     address = ipaddress.ip_address(ip) if ip else None
     for r in rules:
@@ -163,16 +169,14 @@ def route(rules, host="", ip=None, country=None):
             return policy
         if kind in {"IP-CIDR", "IP-CIDR6"} and address and address in ipaddress.ip_network(value):
             return policy
+        if kind == "IP-ASN" and asn is not None and str(asn) == value:
+            return policy
         if kind == "GEOIP" and country == value:
             return policy
     raise ValueError("No matching route")
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--report", type=Path)
-    args = parser.parse_args()
-    raw = PROFILE.read_bytes()
+def validate(raw):
     sections, groups, rules = check_profile(raw)
     expanded, sources = expand(rules)
     samples = {
@@ -195,6 +199,10 @@ def main():
         "download.steamcontent.com": "国内服务", "www.jd.com": "国内服务",
         "www.bilibili.com": "国内服务", "www.baidu.com": "国内服务", "www.qq.com": "国内服务",
         "ad.doubleclick.net": "广告拦截",
+        "chat.openai.com.cdn.cloudflare.net": "AI服务",
+        "openai-api.arkoselabs.com": "AI服务", "chatgpt.livekit.cloud": "AI服务",
+        "api.githubcopilotusercontent.com": "AI服务",
+        "dns.alidns.com": "DIRECT", "nas.lan": "DIRECT",
     }
     outcomes = []
     for host, expected in samples.items():
@@ -211,6 +219,13 @@ def main():
         require(actual == expected, "Fallback order")
         outcomes.append({"host": "unclassified.example", "simulated_country": country,
                          "expected": expected, "actual": actual})
+    # Regression: a non-AI server in AS20473 must not inherit the AI policy.
+    actual = route(expanded, ip="108.61.5.82", asn=20473)
+    require(actual == "漏网之鱼", "Unrelated cloud server hijacked by AI/other broad policy")
+    outcomes.append({"ip": "108.61.5.82", "simulated_asn": 20473,
+                     "expected": "漏网之鱼", "actual": actual})
+    require(not any(r[0] == "IP-ASN" and r[1] == "20473" and r[2] == "AI服务" for r in expanded),
+            "Broad OpenAI ASN rule reintroduced")
     report = {
         "validated_at": datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).isoformat(),
         "profile": "profiles/FengGe.conf", "profile_bytes": len(raw),
@@ -218,12 +233,22 @@ def main():
         "local_rule_lines": len(rules), "remote_files": len(sources),
         "expanded_rule_entries": len(expanded), "remote_bytes": sum(s["bytes"] for s in sources),
         "sample_checks_passed": len(outcomes), "device_tested": False,
+        "upstream_commit": SOURCE_PATTERN.fullmatch(sources[0]["url"]).group(1),
         "limitations": ["Custom static validator, not the Shadowrocket parser/compiler",
                         "No device memory, disconnect, node throughput or service unlock testing",
                         "No real DNS, GeoIP database, ASN or User-Agent evaluation",
-                        "Sources use a moving upstream branch; this report describes the recorded hashes only"],
+                        "All remote rules are pinned to the reported upstream commit; checks do not guarantee device behaviour"],
         "sources": sources, "route_samples": outcomes,
     }
+    return report
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--profile", type=Path, default=PROFILE)
+    parser.add_argument("--report", type=Path)
+    args = parser.parse_args()
+    report = validate(args.profile.read_bytes())
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

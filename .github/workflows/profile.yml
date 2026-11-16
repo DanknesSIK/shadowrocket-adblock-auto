@@ -1,0 +1,48 @@
+name: Update checked Shadowrocket profile
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '47 0 * * *'  # Beijing 08:47; scheduled runs may be delayed.
+  push:
+    paths:
+      - 'templates/FengGe.conf'
+      - 'scripts/validate_profile.py'
+      - 'scripts/update_profile.py'
+      - 'profile_tests/**'
+      - '.github/workflows/profile.yml'
+
+permissions:
+  contents: write
+
+# Share the existing module builder's lock so the two jobs cannot race pushes.
+concurrency:
+  group: shadowrocket-adblock-auto
+  cancel-in-progress: false
+
+jobs:
+  update-profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test failure handling and guards
+        run: python -m unittest discover -s profile_tests -v
+      - name: Validate snapshot and prepare release
+        run: python scripts/update_profile.py
+      - name: Publish checked profile atomically
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profiles/FengGe.conf profiles/FengGe-Emergency.conf profiles/validation-report.json
+          if git diff --cached --quiet; then
+            echo "Checked; no source or configuration changes."
+          else
+            git commit -m "chore: publish checked Shadowrocket rule snapshot"
+            git push
+          fi

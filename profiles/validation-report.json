@@ -1,33 +1,26 @@
 {
-  "validated_at": "2026-11-16T10:28:25.625825+08:00",
+  "validated_at": "2026-11-16T10:41:26.011593+08:00",
   "profile": "profiles/FengGe.conf",
-  "profile_bytes": 11818,
-  "profile_sha256": "c4a60c62eedf2b321061908a3f2e8eca8cf31fc04aca6adb18f8b211a78a55ef",
+  "profile_bytes": 13041,
+  "profile_sha256": "5be71b8069a8fa50e1f4ca26de4dd69d1e81e056d80c3edbd32e57f8b125c9fe",
   "groups": 25,
-  "local_rule_lines": 108,
-  "remote_files": 19,
-  "expanded_rule_entries": 47781,
-  "remote_bytes": 824373,
-  "sample_checks_passed": 51,
+  "local_rule_lines": 118,
+  "remote_files": 18,
+  "expanded_rule_entries": 47757,
+  "remote_bytes": 823020,
+  "sample_checks_passed": 58,
   "device_tested": false,
+  "upstream_commit": "0b6897dc17e0c513d25449c935a9694818e32f0c",
   "limitations": [
     "Custom static validator, not the Shadowrocket parser/compiler",
     "No device memory, disconnect, node throughput or service unlock testing",
     "No real DNS, GeoIP database, ASN or User-Agent evaluation",
-    "Sources use a moving upstream branch; this report describes the recorded hashes only"
+    "All remote rules are pinned to the reported upstream commit; checks do not guarantee device behaviour"
   ],
   "sources": [
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/OpenAI/OpenAI.list",
-      "http_status": 200,
-      "bytes": 1353,
-      "entries": 35,
-      "sha256": "6f4047cdbf6953cf5d9b38c4ccd6da7bc6f1acb91b7a87134f25d5b8f5d2408b"
-    },
-    {
-      "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Claude/Claude.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Claude/Claude.list",
       "http_status": 200,
       "bytes": 244,
       "entries": 3,
@@ -35,7 +28,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Gemini/Gemini.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Gemini/Gemini.list",
       "http_status": 200,
       "bytes": 605,
       "entries": 13,
@@ -43,7 +36,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Telegram/Telegram.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Telegram/Telegram.list",
       "http_status": 200,
       "bytes": 1338,
       "entries": 40,
@@ -51,7 +44,7 @@
     },
     {
       "type": "DOMAIN-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/AdvertisingLite/AdvertisingLite_Domain.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/AdvertisingLite/AdvertisingLite_Domain.list",
       "http_status": 200,
       "bytes": 595771,
       "entries": 37692,
@@ -59,7 +52,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/YouTube/YouTube.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/YouTube/YouTube.list",
       "http_status": 200,
       "bytes": 5436,
       "entries": 190,
@@ -67,7 +60,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Netflix/Netflix.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Netflix/Netflix.list",
       "http_status": 200,
       "bytes": 40351,
       "entries": 1157,
@@ -75,7 +68,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Disney/Disney.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Disney/Disney.list",
       "http_status": 200,
       "bytes": 5565,
       "entries": 173,
@@ -83,7 +76,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Spotify/Spotify.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Spotify/Spotify.list",
       "http_status": 200,
       "bytes": 1197,
       "entries": 30,
@@ -91,7 +84,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/TikTok/TikTok.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/TikTok/TikTok.list",
       "http_status": 200,
       "bytes": 1186,
       "entries": 35,
@@ -99,7 +92,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitHub/GitHub.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/GitHub/GitHub.list",
       "http_status": 200,
       "bytes": 1117,
       "entries": 31,
@@ -107,7 +100,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Google/Google.list",
       "http_status": 200,
       "bytes": 19777,
       "entries": 698,
@@ -115,7 +108,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Apple/Apple.list",
       "http_status": 200,
       "bytes": 1451,
       "entries": 43,
@@ -123,7 +116,7 @@
     },
     {
       "type": "DOMAIN-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple_Domain.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Apple/Apple_Domain.list",
       "http_status": 200,
       "bytes": 29583,
       "entries": 1559,
@@ -131,7 +124,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Microsoft/Microsoft.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Microsoft/Microsoft.list",
       "http_status": 200,
       "bytes": 20536,
       "entries": 671,
@@ -139,7 +132,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/SteamCN/SteamCN.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/SteamCN/SteamCN.list",
       "http_status": 200,
       "bytes": 662,
       "entries": 17,
@@ -147,7 +140,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Game/Game.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Game/Game.list",
       "http_status": 200,
       "bytes": 19725,
       "entries": 612,
@@ -155,7 +148,7 @@
     },
     {
       "type": "RULE-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ProxyLite/ProxyLite.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/ProxyLite/ProxyLite.list",
       "http_status": 200,
       "bytes": 27409,
       "entries": 1004,
@@ -163,7 +156,7 @@
     },
     {
       "type": "DOMAIN-SET",
-      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/China/China_Domain.list",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/China/China_Domain.list",
       "http_status": 200,
       "bytes": 51067,
       "entries": 3689,
@@ -402,6 +395,36 @@
       "actual": "广告拦截"
     },
     {
+      "host": "chat.openai.com.cdn.cloudflare.net",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "openai-api.arkoselabs.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "chatgpt.livekit.cloud",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "api.githubcopilotusercontent.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "dns.alidns.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "nas.lan",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
       "ip": "192.168.8.8",
       "expected": "DIRECT",
       "actual": "DIRECT"
@@ -427,6 +450,24 @@
       "simulated_country": null,
       "expected": "漏网之鱼",
       "actual": "漏网之鱼"
+    },
+    {
+      "ip": "108.61.5.82",
+      "simulated_asn": 20473,
+      "expected": "漏网之鱼",
+      "actual": "漏网之鱼"
     }
-  ]
+  ],
+  "release_guard": {
+    "max_rule_entries": 65000,
+    "max_remote_bytes": 1500000,
+    "max_large_source_growth": 0.35,
+    "max_large_source_drop": 0.25
+  },
+  "emergency_profile": {
+    "path": "profiles/FengGe-Emergency.conf",
+    "bytes": 5599,
+    "sha256": "6aa901574776cecff4d29edd89f9f2a859b2691da699132c23c276d8b0fe1f44",
+    "sample_checks_passed": 10
+  }
 }

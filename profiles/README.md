@@ -37,11 +37,12 @@ https://raw.githubusercontent.com/DanknesSIK/shadowrocket-adblock-auto/main/prof
 
 ## 广告与规则规模
 
-本配置加载 19 个远程文件，全部使用 blackmatrix7 的 Shadowrocket 格式。没有把多个全量广告库叠加在一起，也没有加载第三方脚本、响应正文改写或 HTTPS 解密域名。
+本配置加载 18 个远程文件，全部使用 blackmatrix7 的 Shadowrocket 格式，并锁定到同一通过检查的提交版本。没有把多个全量广告库叠加在一起，也没有加载第三方脚本、响应正文改写或 HTTPS 解密域名。
 
 - 广告只加载 `AdvertisingLite_Domain.list`，覆盖域名匹配；主动省略同目录 `.list` 中的宽泛关键词、IP 与 URL-REGEX。
 - 中国分流只加载 `China_Domain.list`，补充 `.cn` 后缀和 `GEOIP,CN`；省略宽泛的关键词和 User-Agent 分流。
 - Apple 的 `.list` 与 `_Domain.list` **互补**，配套加载。不能把所有同名普通表和域名表都当作重复内容删除。上游目录 README 应逐项核对。
+- OpenAI 改用主配置中的明确域名，移除原上游表里覆盖整个云服务商的 `IP-ASN,20473`，以及把公共监控、支付服务整体归入 AI 的规则。新增服务域名需要更新主配置模板，不能认为上游 OpenAI 表的所有变化都会自动合入。
 - 广告域名拦截无法保证清除 YouTube 片内广告、App 信息流广告或与正文共用域名的开屏广告。
 - `MITM` 默认关闭。单独打开解密开关不会凭空增加去广告能力；这份主配置没有配置解密目标或重写脚本。
 
@@ -67,11 +68,35 @@ https://raw.githubusercontent.com/DanknesSIK/shadowrocket-adblock-auto/main/prof
 
 ## 更新、回退与排查
 
-主配置包含 `update-url`，需要在 Shadowrocket 主动更新或启用其配置后台更新后才能取得远程更改。它不意味着客户端实时同步。规则来源使用上游 `master` 分支，更新时内容会变化；本次验证只对应报告中的哈希。
+主配置包含 `update-url`。手机必须开启 **设置 → 自动更新 → 配置 → 自动后台更新**，并允许系统后台 App 刷新。也可以手动对主配置执行“更新配置”。后台调度可能延迟，不保证准点。
 
-自动更新整份主配置可能覆盖本地文本修改。若加入私有 /32 分流或其他个性规则，请保存本地副本并删除/注释 `update-url`，或使用客户端的扩展配置保存本地覆盖项；私有内容不需要上传 GitHub。
+**v1.1 的更新流程：**
 
-本仓库原有自动构建任务继续只更新独立去广告模块，不会改写 `profiles/FengGe.conf`。不要把“模块自动构建成功”当作主配置已经实机验证。
+1. [主配置工作流](../../actions/workflows/profile.yml) 每天北京时间 **08:47 左右**，以及模板/检查程序修改后，读取上游 `master` 的一个精确提交。
+2. 下载这一提交中的全部所需规则，检查格式、策略关系、来源哈希、关键业务样例和规则规模。
+3. 全部通过后，在一次 Git 提交中发布主配置、应急配置与验证报告。主配置内的规则链接固定到这个上游提交。
+4. 下载失败、样例失败或规模异常时停止发布，手机继续使用上一份已发布版本。无关上游提交未改变实际规则内容时不重复发布。
+5. 手机更新**整份主配置**后才能取得下一份固定规则版本。只点“编译配置”或只刷新规则集，会继续拉取当前固定版本。
+
+发布限制：展开条目上限 65,000、远程文本总量上限 1,500,000 字节；大规则文件单次增长超过约 35% 或减少超过约 25% 会被拦下，小文件另有绝对变化容差。这些检查能发现部分异常，不能保证无误拦截，也不代表设备内存上限。
+
+自动更新整份主配置可能覆盖本地文本修改及分组设置。需要长期保留私有 /32 分流、DNS 或固定节点设置时，使用客户端的 **扩展配置**：从远程主配置扩展出一个本地配置，将个性设置保存在本地扩展中；在 ⓘ → 通用 → 包含配置 中核对继承关系。主配置仍负责远程更新，本地扩展拥有更高优先级。不要把私人内网信息上传到公开仓库。扩展关系与更新后的分组选择仍需在客户端确认。
+
+如果选择删除/注释 `update-url` 并仅保存独立本地副本，该副本会保持当前固定规则版本，需要以后手动导入新版。
+
+本仓库原有 `build.yml` 继续只更新独立去广告模块；新增 `profile.yml` 更新主配置。两者共享发布锁以避免同时推送。任何构建通过都不等于 iPhone 实机验证。
+
+### 应急配置
+
+提前下载 [FengGe-Emergency.conf](https://raw.githubusercontent.com/DanknesSIK/shadowrocket-adblock-auto/main/profiles/FengGe-Emergency.conf)，需要时在本地切换：
+
+- 使用已有首页节点，保留常用国内直连与基础 AI/内网域名规则。
+- 不加载远程规则、不运行自动测速、脚本或解密，也不自动更新自身。
+- 不提供广告过滤；未收录的国内域名依赖中国 IP 兜底，覆盖少于主配置。
+- 局域网 NAS 仍可访问；远程 `ts.net` 请求明确拒绝，避免经公共代理发送。排查内置 Tailscale 负载时，仍需要在客户端手动关闭它的全局开关；切换配置不会关闭该全局功能。
+- 在断网或远程资源加载失败时，已提前下载的文件可用于排查，但节点失效、运营商断网等问题仍可能影响连接。
+
+恢复后切回 `FengGe.conf`。历史完整版本也保留在 Git 提交记录中。
 
 | 现象 | 首先检查 |
 |---|---|
@@ -87,10 +112,13 @@ https://raw.githubusercontent.com/DanknesSIK/shadowrocket-adblock-auto/main/prof
 运行：
 
 ```bash
-python3 scripts/validate_profile.py --report profiles/validation-report.json
+python3 scripts/validate_profile.py
+python3 -m unittest discover -s profile_tests -v
 ```
 
 检查 UTF-8/LF、配置段、策略引用、默认选择、环路、节点名筛选、远程资源状态与格式、来源哈希，以及关键业务的离线匹配样例。该工具是自定义静态检查器，**不是 Shadowrocket 原生编译器**；它不验证设备内存、DNS/ASN/GeoIP 实际查询、节点协议兼容性、吞吐、稳定性或服务解锁。
+
+维护者修改 `templates/FengGe.conf` 后运行 `python3 scripts/update_profile.py`，由程序验证并生成发布文件。不要直接修改已发布的 `profiles/FengGe.conf`；它的哈希必须与发布报告一致，否则自动更新会停止。
 
 ## 参考来源
 
@@ -98,5 +126,6 @@ python3 scripts/validate_profile.py --report profiles/validation-report.json
 - [Johnshall 懒人分组配置](https://github.com/Johnshall/Shadowrocket-ADBlock-Rules-Forever/blob/release/lazy_group.conf)：原生完整主配置和应用分组结构的参考。此处重新组织规则与默认值，没有直接照搬所有选项。
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)：远程分流与广告域名数据，版权及许可归原作者。
 - [AdvertisingLite 文件说明](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/AdvertisingLite/README.md)：普通表和域名表的互补关系、误拦截说明及来源。
+- [OpenAI ASN 误匹配反馈](https://github.com/blackmatrix7/ios_rule_script/issues/1384)：上游对非 AI 云服务器流量被归入 OpenAI 的问题记录。
 
 这是一份按明确使用场景取舍的日常配置，不作“最强”“零误杀”“零重启”或固定内存保证。
