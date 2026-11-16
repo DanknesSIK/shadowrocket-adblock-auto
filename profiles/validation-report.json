@@ -1,0 +1,432 @@
+{
+  "validated_at": "2026-11-16T10:28:25.625825+08:00",
+  "profile": "profiles/FengGe.conf",
+  "profile_bytes": 11818,
+  "profile_sha256": "c4a60c62eedf2b321061908a3f2e8eca8cf31fc04aca6adb18f8b211a78a55ef",
+  "groups": 25,
+  "local_rule_lines": 108,
+  "remote_files": 19,
+  "expanded_rule_entries": 47781,
+  "remote_bytes": 824373,
+  "sample_checks_passed": 51,
+  "device_tested": false,
+  "limitations": [
+    "Custom static validator, not the Shadowrocket parser/compiler",
+    "No device memory, disconnect, node throughput or service unlock testing",
+    "No real DNS, GeoIP database, ASN or User-Agent evaluation",
+    "Sources use a moving upstream branch; this report describes the recorded hashes only"
+  ],
+  "sources": [
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/OpenAI/OpenAI.list",
+      "http_status": 200,
+      "bytes": 1353,
+      "entries": 35,
+      "sha256": "6f4047cdbf6953cf5d9b38c4ccd6da7bc6f1acb91b7a87134f25d5b8f5d2408b"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Claude/Claude.list",
+      "http_status": 200,
+      "bytes": 244,
+      "entries": 3,
+      "sha256": "870e7e25d798e7f00338507f773b0eea4dfd15e25e9df0a27d5ae421ae1ab378"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Gemini/Gemini.list",
+      "http_status": 200,
+      "bytes": 605,
+      "entries": 13,
+      "sha256": "db8f69154426dca76792ab80b3ad6b0e2d078ebe0e52e76faec1724245a4ec49"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Telegram/Telegram.list",
+      "http_status": 200,
+      "bytes": 1338,
+      "entries": 40,
+      "sha256": "09f093cce5b3e2994147a2640e03040aac75e1db7bf2103fd1c9a2509b0176ab"
+    },
+    {
+      "type": "DOMAIN-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/AdvertisingLite/AdvertisingLite_Domain.list",
+      "http_status": 200,
+      "bytes": 595771,
+      "entries": 37692,
+      "sha256": "e43ab7970cfa5bde9b222a18c0f5673dcced42e1bfada25f04254a514231ec34"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/YouTube/YouTube.list",
+      "http_status": 200,
+      "bytes": 5436,
+      "entries": 190,
+      "sha256": "f764cd91a779982225b3553ece8033c86a6545f4990f5fefd356805de962aee9"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Netflix/Netflix.list",
+      "http_status": 200,
+      "bytes": 40351,
+      "entries": 1157,
+      "sha256": "ec37f90727e7db062d754487c4bed68ae8bba28f349aef0995f10c06f5e8b231"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Disney/Disney.list",
+      "http_status": 200,
+      "bytes": 5565,
+      "entries": 173,
+      "sha256": "65ededc7b608e440f3d918f6e95b19ca52460c8fe368dbd9e840b4bc8669f753"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Spotify/Spotify.list",
+      "http_status": 200,
+      "bytes": 1197,
+      "entries": 30,
+      "sha256": "577afc9442a38c578e0aa8769b192d2f935e808114c60cbd5afd2294c79b74d0"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/TikTok/TikTok.list",
+      "http_status": 200,
+      "bytes": 1186,
+      "entries": 35,
+      "sha256": "94262918311e66c8a3bcf5a65173ff0c4e1ceaa29e24644acafadc127121a295"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitHub/GitHub.list",
+      "http_status": 200,
+      "bytes": 1117,
+      "entries": 31,
+      "sha256": "ced8ab0ecda5775d04ec8ee6a57b282181108565331a6a1d85e9a26fee25d79b"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list",
+      "http_status": 200,
+      "bytes": 19777,
+      "entries": 698,
+      "sha256": "c6efe08ab4c0a12ddba20f5e75abfba2dd63a42b810f8cb5c303433a38e93b73"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple.list",
+      "http_status": 200,
+      "bytes": 1451,
+      "entries": 43,
+      "sha256": "438384889951117d5f432b600c4b3009583f466de7e87bbe2db865a2ac732a0c"
+    },
+    {
+      "type": "DOMAIN-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple_Domain.list",
+      "http_status": 200,
+      "bytes": 29583,
+      "entries": 1559,
+      "sha256": "f1074adb086fd44a95db76e9dcc96fc1133f0ec4c29b15d6f2346686deb25d00"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Microsoft/Microsoft.list",
+      "http_status": 200,
+      "bytes": 20536,
+      "entries": 671,
+      "sha256": "22df1a1017ad5d41755bf020ca8eb9afeedc7bdc2c649ed2074b255227a7ed8e"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/SteamCN/SteamCN.list",
+      "http_status": 200,
+      "bytes": 662,
+      "entries": 17,
+      "sha256": "82c144434e9199c524d95caa8e3659c9f6f1de9fd23b223a58b5d3c821923936"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Game/Game.list",
+      "http_status": 200,
+      "bytes": 19725,
+      "entries": 612,
+      "sha256": "63ed1092c588beb377cad51b574c921ca113a880752b6c0b8c96b9ecc7f13366"
+    },
+    {
+      "type": "RULE-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ProxyLite/ProxyLite.list",
+      "http_status": 200,
+      "bytes": 27409,
+      "entries": 1004,
+      "sha256": "fed54f496d2c0c092096b977ec98ce36db02f1969f3e4ac32fd03a4ee02a7e5f"
+    },
+    {
+      "type": "DOMAIN-SET",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/China/China_Domain.list",
+      "http_status": 200,
+      "bytes": 51067,
+      "entries": 3689,
+      "sha256": "d35eec789ae09a6d2b6dd48ed2c52d6d811f433b1e73a92b2f9246b778fa7923"
+    }
+  ],
+  "route_samples": [
+    {
+      "host": "nas.local",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "nas.home.arpa",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "demo.tail-example.ts.net",
+      "expected": "Hermes内网",
+      "actual": "Hermes内网"
+    },
+    {
+      "host": "quickconnect.to",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "api.10jqka.com.cn",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "push.hexin.cn",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "quote.eastmoney.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "pay.alipay.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "wx.qq.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "servicewechat.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "api.deepseek.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "chat.qwen.ai",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "dashscope.aliyuncs.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "www.feishu.cn",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "api.kimi.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "chatgpt.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "api.openai.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "files.oaiusercontent.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "api.anthropic.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "claude.ai",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "gemini.google.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "aistudio.google.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "notebooklm.google.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "copilot.microsoft.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "api.githubcopilot.com",
+      "expected": "AI服务",
+      "actual": "AI服务"
+    },
+    {
+      "host": "t.me",
+      "expected": "Telegram",
+      "actual": "Telegram"
+    },
+    {
+      "host": "api.telegram.org",
+      "expected": "Telegram",
+      "actual": "Telegram"
+    },
+    {
+      "host": "www.youtube.com",
+      "expected": "YouTube",
+      "actual": "YouTube"
+    },
+    {
+      "host": "rr1.googlevideo.com",
+      "expected": "YouTube",
+      "actual": "YouTube"
+    },
+    {
+      "host": "www.netflix.com",
+      "expected": "国际影视",
+      "actual": "国际影视"
+    },
+    {
+      "host": "www.disneyplus.com",
+      "expected": "国际影视",
+      "actual": "国际影视"
+    },
+    {
+      "host": "open.spotify.com",
+      "expected": "Spotify",
+      "actual": "Spotify"
+    },
+    {
+      "host": "www.tiktok.com",
+      "expected": "TikTok",
+      "actual": "TikTok"
+    },
+    {
+      "host": "github.com",
+      "expected": "海外开发",
+      "actual": "海外开发"
+    },
+    {
+      "host": "raw.githubusercontent.com",
+      "expected": "海外开发",
+      "actual": "海外开发"
+    },
+    {
+      "host": "www.google.com",
+      "expected": "Google",
+      "actual": "Google"
+    },
+    {
+      "host": "apple.com",
+      "expected": "苹果服务",
+      "actual": "苹果服务"
+    },
+    {
+      "host": "www.icloud.com",
+      "expected": "苹果服务",
+      "actual": "苹果服务"
+    },
+    {
+      "host": "outlook.com",
+      "expected": "微软服务",
+      "actual": "微软服务"
+    },
+    {
+      "host": "steamcommunity.com",
+      "expected": "游戏平台",
+      "actual": "游戏平台"
+    },
+    {
+      "host": "download.steamcontent.com",
+      "expected": "国内服务",
+      "actual": "国内服务"
+    },
+    {
+      "host": "www.jd.com",
+      "expected": "国内服务",
+      "actual": "国内服务"
+    },
+    {
+      "host": "www.bilibili.com",
+      "expected": "国内服务",
+      "actual": "国内服务"
+    },
+    {
+      "host": "www.baidu.com",
+      "expected": "国内服务",
+      "actual": "国内服务"
+    },
+    {
+      "host": "www.qq.com",
+      "expected": "国内服务",
+      "actual": "国内服务"
+    },
+    {
+      "host": "ad.doubleclick.net",
+      "expected": "广告拦截",
+      "actual": "广告拦截"
+    },
+    {
+      "ip": "192.168.8.8",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "ip": "10.20.30.40",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "ip": "149.154.167.51",
+      "expected": "Telegram",
+      "actual": "Telegram"
+    },
+    {
+      "host": "unclassified.example",
+      "simulated_country": "CN",
+      "expected": "国内服务",
+      "actual": "国内服务"
+    },
+    {
+      "host": "unclassified.example",
+      "simulated_country": null,
+      "expected": "漏网之鱼",
+      "actual": "漏网之鱼"
+    }
+  ]
+}

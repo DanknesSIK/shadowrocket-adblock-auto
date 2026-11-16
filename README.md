@@ -1,5 +1,17 @@
 # Shadowrocket AdBlock Auto
 
+## 完整主配置：FengGe.conf
+
+新增适合日常使用的 [FengGe.conf](profiles/FengGe.conf)：完整代理分组、国内直连、AI/视频独立分流、轻量广告域名拦截与内置 Tailscale 域名分流。默认关闭 HTTPS 解密，不加载脚本。节点仍由首页订阅管理。
+
+- [安装与分流说明](profiles/README.md)
+- [配置直链](https://raw.githubusercontent.com/DanknesSIK/shadowrocket-adblock-auto/main/profiles/FengGe.conf)
+- [静态验证与远程来源报告](profiles/validation-report.json)
+
+初次使用该主配置时，停用旧分流/广告模块，包括下方的 `AllApps-Auto.sgmodule`。报告不代表 iPhone 实机测试。
+
+## 独立去广告模块（原有功能）
+
 将多个公开规则仓库的 Shadowrocket 广告规则聚合到**一个远程订阅模块**，由 GitHub Actions 自动更新。原来的节点订阅与代理分流配置不需要改变。
 
 ## 安装地址
