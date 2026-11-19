@@ -1,14 +1,14 @@
 {
-  "validated_at": "2026-11-16T12:47:50.652076+08:00",
+  "validated_at": "2026-11-19T10:30:10.456970+08:00",
   "profile": "profiles/FengGe.conf",
-  "profile_bytes": 13208,
-  "profile_sha256": "f24197f6095b0a9c1226907bbd94f804075a27336e3b620ed31eadfb3fe275be",
+  "profile_bytes": 13545,
+  "profile_sha256": "28bc2f9161b4496a47887501b0220b22488bc41750d02332e2927dbf5cf71891",
   "groups": 25,
-  "local_rule_lines": 120,
+  "local_rule_lines": 127,
   "remote_files": 18,
-  "expanded_rule_entries": 47759,
+  "expanded_rule_entries": 47766,
   "remote_bytes": 823020,
-  "sample_checks_passed": 58,
+  "sample_checks_passed": 66,
   "device_tested": false,
   "upstream_commit": "0b6897dc17e0c513d25449c935a9694818e32f0c",
   "limitations": [
@@ -191,6 +191,46 @@
     },
     {
       "host": "push.hexin.cn",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "www.10jqka.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "www.hexin.com.cn",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "www.myhexin.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "www.ths123.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "www.123ths.com",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "www.tonghuashun.com.cn",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "www.tonghuashun.cn",
+      "expected": "DIRECT",
+      "actual": "DIRECT"
+    },
+    {
+      "host": "www.iwencai.com",
       "expected": "DIRECT",
       "actual": "DIRECT"
     },
@@ -466,8 +506,8 @@
   },
   "emergency_profile": {
     "path": "profiles/FengGe-Emergency.conf",
-    "bytes": 5668,
-    "sha256": "517fd85446e6afbbf08eb2c741ae39efbbffad1e7077736606946e67f4b20615",
+    "bytes": 5908,
+    "sha256": "ec4ba21c4f785014715ceae0a2fc5c74c6349ca70c2d1ed42500cfee5d2899b1",
     "sample_checks_passed": 10
   }
 }
