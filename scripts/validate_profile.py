@@ -75,7 +75,7 @@ def check_profile(raw):
         if "policy-select-name" in opts:
             require(opts["policy-select-name"] in members, "Invalid default " + name)
         if parts[0] in {"url-test", "fallback"}:
-            require(int(opts["interval"]) >= 1800, "Aggressive testing interval")
+            require(int(opts["interval"]) >= (600 if name in {"ChatGPT自动", "PikPak自动"} else 1800), "Aggressive testing interval")
         groups[name] = members
     policies = BUILTINS | groups.keys()
     for name, members in groups.items():
@@ -102,6 +102,12 @@ def check_profile(raw):
     for name in ("自动选择", "故障转移", "手动选择"):
         require(not regexes[name].search("剩余流量 30GB"), "Quota entry included")
         require(regexes[name].search("V1-香港HKT01|NF|VLESS"), "Realistic node excluded")
+    for sample in ("香港01", "HK01", "hk-02", "Hong Kong 1", "HongKong02", "🇭🇰 01", "深港01", "剩余流量 30GB"):
+        require(not regexes["ChatGPT自动"].search(sample), "ChatGPT excluded node admitted: " + sample)
+    for sample in ("US01", "日本01", "台湾02", "SG01", "韩国01", "德国01", "新马来西亚3"):
+        require(regexes["ChatGPT自动"].search(sample), "ChatGPT eligible node excluded: " + sample)
+    require(regexes["PikPak自动"].search("HK01"), "PikPak must include Hong Kong")
+    require(not regexes["PikPak自动"].search("剩余流量 30GB"), "PikPak quota entry included")
     return sections, groups, rules
 
 
@@ -193,7 +199,7 @@ def validate(raw):
         "quote.eastmoney.com": "DIRECT", "pay.alipay.com": "DIRECT", "wx.qq.com": "DIRECT",
         "servicewechat.com": "DIRECT", "api.deepseek.com": "DIRECT", "chat.qwen.ai": "DIRECT",
         "dashscope.aliyuncs.com": "DIRECT", "www.feishu.cn": "DIRECT", "api.kimi.com": "DIRECT",
-        "chatgpt.com": "AI服务", "api.openai.com": "AI服务", "files.oaiusercontent.com": "AI服务",
+        "chatgpt.com": "ChatGPT自动", "api.openai.com": "ChatGPT自动", "files.oaiusercontent.com": "ChatGPT自动",
         "api.anthropic.com": "AI服务", "claude.ai": "AI服务", "gemini.google.com": "AI服务",
         "aistudio.google.com": "AI服务", "notebooklm.google.com": "AI服务",
         "copilot.microsoft.com": "AI服务", "api.githubcopilot.com": "AI服务",
@@ -207,8 +213,12 @@ def validate(raw):
         "download.steamcontent.com": "国内服务", "www.jd.com": "国内服务",
         "www.bilibili.com": "国内服务", "www.baidu.com": "国内服务", "www.qq.com": "国内服务",
         "ad.doubleclick.net": "广告拦截",
-        "chat.openai.com.cdn.cloudflare.net": "AI服务",
-        "openai-api.arkoselabs.com": "AI服务", "chatgpt.livekit.cloud": "AI服务",
+        "api-drive.mypikpak.com": "PikPak自动", "user.mypikpak.com": "PikPak自动",
+        "hub5pnc.sandai.net": "PikPak自动",
+        "oaistatic.com": "ChatGPT自动", "withpersona.com": "ChatGPT自动",
+        "host.livekit.cloud": "ChatGPT自动",
+        "chat.openai.com.cdn.cloudflare.net": "ChatGPT自动",
+        "openai-api.arkoselabs.com": "ChatGPT自动", "chatgpt.livekit.cloud": "ChatGPT自动",
         "api.githubcopilotusercontent.com": "AI服务",
         "dns.alidns.com": "DIRECT", "nas.lan": "DIRECT",
     }

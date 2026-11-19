@@ -1,14 +1,14 @@
 {
-  "validated_at": "2026-11-19T10:30:10.456970+08:00",
+  "validated_at": "2026-11-20T03:04:40.031474+08:00",
   "profile": "profiles/FengGe.conf",
-  "profile_bytes": 13545,
-  "profile_sha256": "28bc2f9161b4496a47887501b0220b22488bc41750d02332e2927dbf5cf71891",
-  "groups": 25,
-  "local_rule_lines": 127,
+  "profile_bytes": 14650,
+  "profile_sha256": "f818b083e5516796480960dc07ead873e5ec971f6dc29e5963b83f08afe051bb",
+  "groups": 27,
+  "local_rule_lines": 135,
   "remote_files": 18,
-  "expanded_rule_entries": 47766,
+  "expanded_rule_entries": 47774,
   "remote_bytes": 823020,
-  "sample_checks_passed": 66,
+  "sample_checks_passed": 72,
   "device_tested": false,
   "upstream_commit": "0b6897dc17e0c513d25449c935a9694818e32f0c",
   "limitations": [
@@ -281,18 +281,18 @@
     },
     {
       "host": "chatgpt.com",
-      "expected": "AI服务",
-      "actual": "AI服务"
+      "expected": "ChatGPT自动",
+      "actual": "ChatGPT自动"
     },
     {
       "host": "api.openai.com",
-      "expected": "AI服务",
-      "actual": "AI服务"
+      "expected": "ChatGPT自动",
+      "actual": "ChatGPT自动"
     },
     {
       "host": "files.oaiusercontent.com",
-      "expected": "AI服务",
-      "actual": "AI服务"
+      "expected": "ChatGPT自动",
+      "actual": "ChatGPT自动"
     },
     {
       "host": "api.anthropic.com",
@@ -435,19 +435,49 @@
       "actual": "广告拦截"
     },
     {
+      "host": "api-drive.mypikpak.com",
+      "expected": "PikPak自动",
+      "actual": "PikPak自动"
+    },
+    {
+      "host": "user.mypikpak.com",
+      "expected": "PikPak自动",
+      "actual": "PikPak自动"
+    },
+    {
+      "host": "hub5pnc.sandai.net",
+      "expected": "PikPak自动",
+      "actual": "PikPak自动"
+    },
+    {
+      "host": "oaistatic.com",
+      "expected": "ChatGPT自动",
+      "actual": "ChatGPT自动"
+    },
+    {
+      "host": "withpersona.com",
+      "expected": "ChatGPT自动",
+      "actual": "ChatGPT自动"
+    },
+    {
+      "host": "host.livekit.cloud",
+      "expected": "ChatGPT自动",
+      "actual": "ChatGPT自动"
+    },
+    {
       "host": "chat.openai.com.cdn.cloudflare.net",
-      "expected": "AI服务",
-      "actual": "AI服务"
+      "expected": "ChatGPT自动",
+      "actual": "ChatGPT自动"
     },
     {
       "host": "openai-api.arkoselabs.com",
-      "expected": "AI服务",
-      "actual": "AI服务"
+      "expected": "ChatGPT自动",
+      "actual": "ChatGPT自动"
     },
     {
       "host": "chatgpt.livekit.cloud",
-      "expected": "AI服务",
-      "actual": "AI服务"
+      "expected": "ChatGPT自动",
+      "actual": "ChatGPT自动"
     },
     {
       "host": "api.githubcopilotusercontent.com",
@@ -506,8 +536,8 @@
   },
   "emergency_profile": {
     "path": "profiles/FengGe-Emergency.conf",
-    "bytes": 5908,
-    "sha256": "ec4ba21c4f785014715ceae0a2fc5c74c6349ca70c2d1ed42500cfee5d2899b1",
+    "bytes": 6232,
+    "sha256": "4ebb2efc998f2cdcfdd4ed25397ac19421e51f367e6396d94358642c865d1659",
     "sample_checks_passed": 10
   }
 }
