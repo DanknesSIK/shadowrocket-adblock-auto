@@ -1,8 +1,8 @@
 {
-  "validated_at": "2026-11-20T03:04:40.031474+08:00",
+  "validated_at": "2026-11-21T02:29:50.521688+08:00",
   "profile": "profiles/FengGe.conf",
-  "profile_bytes": 14650,
-  "profile_sha256": "f818b083e5516796480960dc07ead873e5ec971f6dc29e5963b83f08afe051bb",
+  "profile_bytes": 14656,
+  "profile_sha256": "76ba4e94520a67c4d28f0ab56b3a71f6723027629a98048ef38bcac594d4d248",
   "groups": 27,
   "local_rule_lines": 135,
   "remote_files": 18,
