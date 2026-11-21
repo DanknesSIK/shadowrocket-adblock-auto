@@ -1,9 +1,9 @@
 {
   "sources_enabled": 5,
-  "total_rules": 3546,
+  "total_rules": 3544,
   "mitm_hosts": 62,
-  "bytes": 186485,
-  "sha256": "72f6e6354a7ab5a2e643d986704dd37793cfa62b1a4a90f7a4c9acbcea701cee",
+  "bytes": 186428,
+  "sha256": "142fe5e705d3a7d5e9e6dea91babb8e1b843690adc358eb8946b57f1a7d2b263",
   "remote_js_enabled": true,
   "enabled_script_count": 19,
   "script_urls": [
@@ -19,10 +19,10 @@
     {
       "id": "fmz200-allapps",
       "url": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/Shadowrocket/module/blockAds.srmodule",
-      "sha256": "ec4eedca3a381777dfda1681c40a20a20f038ae344f43c7a93b84da8d5428c02",
+      "sha256": "f6d4d95f42ca2c38acac956c77559b64c8f092a2ffcea337fb682d15b0686527",
       "unknown_lines": 0,
       "counts": {
-        "Rule": 2720,
+        "Rule": 2718,
         "duplicate": 160,
         "filtered": 353,
         "disabled": 802,
