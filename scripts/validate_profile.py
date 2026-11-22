@@ -186,7 +186,7 @@ def validate(raw):
     sections, groups, rules = check_profile(raw)
     expanded, sources = expand(rules)
     samples = {
-        "hermes.staru.icu": "TAILSCALE", "secure.staru.icu": "TAILSCALE",
+        "hermes.staru.icu": "REJECT", "secure.staru.icu": "REJECT",
         "nas.local": "DIRECT", "nas.home.arpa": "DIRECT", "demo.tail-example.ts.net": "Hermes内网",
         "quickconnect.to": "DIRECT", "api.10jqka.com.cn": "DIRECT", "push.hexin.cn": "DIRECT",
         "www.10jqka.com": "DIRECT",

@@ -70,7 +70,7 @@ ChatGPT、OpenAI 接口及已收录登录、静态资源、语音域名使用 `C
 
 ## NAS、Hermes 与 Tailscale
 
-局域网 IP、`.local`、`.lan`、`.home.arpa`、群晖和 QuickConnect 域名直连。`ts.net` 域名交给 `Hermes内网`。`hermes.staru.icu`、`secure.staru.icu` 通过各自的 `[Host]` 项直接映射到私网 IP `100.123.3.89`；网页连接以最高优先级直接匹配 `TAILSCALE`，不受 `Hermes内网` 分组手动选择影响。精确 `/32` 规则只覆盖这一台管理入口，不接管其他 CGNAT 地址。`api.staru.icu` 保持普通公网分流。
+局域网 IP、`.local`、`.lan`、`.home.arpa`、群晖和 QuickConnect 域名直连。`ts.net` 域名交给 `Hermes内网`。`hermes.staru.icu`、`secure.staru.icu` 通过各自的 `[Host]` 项直接映射到私网 IP `100.123.3.89`；网页连接先解析，再按精确私网 IP 匹配 `TAILSCALE`，域名兜底 `REJECT`，不受 `Hermes内网` 分组手动选择影响。精确 `/32` 规则只覆盖这一台管理入口，不接管其他 CGNAT 地址。`api.staru.icu` 保持普通公网分流。
 
 这条分流规则不会自动开启、认证或修复 Tailscale。需要访问 tailnet 时，在 Shadowrocket 的内置 Tailscale 设置中完成认证并确认连接；通常无需设置 Tailscale 出口节点。不要依靠同时开启两个独立 VPN 来实现这条规则。
 
@@ -159,3 +159,7 @@ python3 -m unittest discover -s profile_tests -v
 ## 2026-11-22 恢复静态映射对照
 
 手机已确认加载指定私网 DNS 的版本，但域名 HTTPS 仍失败。本轮将两个管理域名恢复为直接映射 100.123.3.89，绕过私网 DNS 查询，保持 Tailscale 分流。此操作是定位测试，尚不能宣称恢复；更新手机配置并重新连接后验证原域名。
+
+## 2026-11-22 解析后匹配 IP 的对照
+
+静态映射版本在手机上仍未恢复。本轮改为首条 IP-CIDR（不带 no-resolve）触发解析，命中管理私网 IP 后交给 Tailscale；两个原域名的后续规则为 REJECT，阻止解析异常时走公网。保持原域名和 TLS 校验。本轮仍需 iPhone 联网验收，静态检查只验证已提供 IP 时的匹配与公网兜底拒绝。
