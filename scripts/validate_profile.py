@@ -161,6 +161,16 @@ def expand(rules):
 
 def route(rules, host="", ip=None, country=None, asn=None):
     """Domain/IP samples only. Does not look up real DNS, ASN or GeoIP."""
+    # Native compilation prioritizes domain rules over IP rules. This remains
+    # a sample matcher, not a DNS resolver or a complete native compiler.
+    if host:
+        for r in rules:
+            if r[0] == "DOMAIN" and host == r[1]:
+                return r[2]
+            if r[0] == "DOMAIN-SUFFIX" and (host == r[1] or host.endswith("." + r[1])):
+                return r[2]
+            if r[0] == "DOMAIN-KEYWORD" and r[1] in host:
+                return r[2]
     address = ipaddress.ip_address(ip) if ip else None
     for r in rules:
         kind = r[0]
@@ -186,7 +196,7 @@ def validate(raw):
     sections, groups, rules = check_profile(raw)
     expanded, sources = expand(rules)
     samples = {
-        "hermes.staru.icu": "REJECT", "secure.staru.icu": "REJECT",
+        "hermes.staru.icu": "TAILSCALE", "secure.staru.icu": "TAILSCALE",
         "nas.local": "DIRECT", "nas.home.arpa": "DIRECT", "demo.tail-example.ts.net": "Hermes内网",
         "quickconnect.to": "DIRECT", "api.10jqka.com.cn": "DIRECT", "push.hexin.cn": "DIRECT",
         "www.10jqka.com": "DIRECT",

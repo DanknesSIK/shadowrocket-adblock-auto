@@ -138,12 +138,11 @@ class UpdateTests(unittest.TestCase):
         mappings = dict(line.split(" = ", 1) for line in sections["Host"])
         general = dict(line.split(" = ", 1) for line in sections["General"])
         self.assertEqual(general["use-local-host-item-for-proxy"], "true")
-        self.assertEqual(rules[0], ["IP-CIDR", "100.123.3.89/32", "TAILSCALE"])
         for host in ("hermes.staru.icu", "secure.staru.icu"):
             self.assertEqual(mappings[host], "100.123.3.89")
             self.assertEqual(validator.route(rules, host=host, ip=mappings[host], country="CN"), "TAILSCALE")
-            self.assertEqual(validator.route(rules, host=host, country="CN"), "REJECT")
-            self.assertEqual(validator.route(rules, host=host, ip="62.234.172.78", country="CN"), "REJECT")
+            self.assertEqual(validator.route(rules, host=host, country="CN"), "TAILSCALE")
+            self.assertEqual(validator.route(rules, host=host, ip="62.234.172.78", country="CN"), "TAILSCALE")
         self.assertEqual(validator.route(rules, ip="100.123.3.89", country="CN"), "TAILSCALE")
         self.assertNotEqual(validator.route(rules, host="api.staru.icu", country="CN"), "TAILSCALE")
         self.assertNotEqual(validator.route(rules, ip="100.123.3.90", country="CN"), "TAILSCALE")
@@ -155,6 +154,12 @@ class UpdateTests(unittest.TestCase):
             self.assertEqual(validator.route(emergency_rules, host=host), "REJECT")
         self.assertEqual(validator.route(emergency_rules, ip="100.123.3.89"), "REJECT")
 
+
+    def test_domain_reject_cannot_be_used_as_ip_rule_fallback(self):
+        rules = [["IP-CIDR", "100.123.3.89/32", "TAILSCALE"],
+                 ["DOMAIN", "hermes.staru.icu", "REJECT"], ["FINAL", "PROXY"]]
+        self.assertEqual(validator.route(rules, host="hermes.staru.icu", ip="100.123.3.89"), "REJECT")
+        self.assertEqual(validator.route(rules, ip="100.123.3.89"), "TAILSCALE")
 
 if __name__ == "__main__":
     unittest.main()
