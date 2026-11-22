@@ -90,7 +90,7 @@ def emergency_profile(raw):
             lines.append("FINAL,PROXY")
             continue
         policy = p[2]
-        p[2] = "REJECT" if policy == "Hermes内网" else (
+        p[2] = "REJECT" if policy in {"Hermes内网", "TAILSCALE"} else (
             "DIRECT" if policy in {"DIRECT", "国内服务", "苹果服务", "微软服务"} else "PROXY")
         lines.append(",".join(p))
     # Broad domestic domains provide useful operation even with no remote table.

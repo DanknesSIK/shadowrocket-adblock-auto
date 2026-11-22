@@ -132,5 +132,26 @@ class UpdateTests(unittest.TestCase):
         self.assertNotIn(b"url-test", emergency)
 
 
+    def test_management_routes_and_emergency_never_use_public_proxy(self):
+        raw = updater.pin(TEMPLATE, SHA)
+        sections, _, rules = validator.check_profile(raw)
+        mappings = dict(line.split(" = ", 1) for line in sections["Host"])
+        general = dict(line.split(" = ", 1) for line in sections["General"])
+        self.assertEqual(general["use-local-host-item-for-proxy"], "true")
+        for host in ("hermes.staru.icu", "secure.staru.icu"):
+            self.assertEqual(mappings[host], "100.123.3.89")
+            self.assertEqual(validator.route(rules, host=host, country="CN"), "TAILSCALE")
+        self.assertEqual(validator.route(rules, ip="100.123.3.89", country="CN"), "TAILSCALE")
+        self.assertNotEqual(validator.route(rules, host="api.staru.icu", country="CN"), "TAILSCALE")
+        self.assertNotEqual(validator.route(rules, ip="100.123.3.90", country="CN"), "TAILSCALE")
+        emergency = updater.emergency_profile(raw).decode()
+        emergency_rules = [line.split(",") for line in
+                           emergency.split("[Rule]", 1)[1].split("[Host]", 1)[0].splitlines()
+                           if line and not line.startswith("#")]
+        for host in ("hermes.staru.icu", "secure.staru.icu"):
+            self.assertEqual(validator.route(emergency_rules, host=host), "REJECT")
+        self.assertEqual(validator.route(emergency_rules, ip="100.123.3.89"), "REJECT")
+
+
 if __name__ == "__main__":
     unittest.main()

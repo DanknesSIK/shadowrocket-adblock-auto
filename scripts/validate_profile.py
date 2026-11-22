@@ -186,6 +186,7 @@ def validate(raw):
     sections, groups, rules = check_profile(raw)
     expanded, sources = expand(rules)
     samples = {
+        "hermes.staru.icu": "TAILSCALE", "secure.staru.icu": "TAILSCALE",
         "nas.local": "DIRECT", "nas.home.arpa": "DIRECT", "demo.tail-example.ts.net": "Hermes内网",
         "quickconnect.to": "DIRECT", "api.10jqka.com.cn": "DIRECT", "push.hexin.cn": "DIRECT",
         "www.10jqka.com": "DIRECT",
@@ -227,7 +228,7 @@ def validate(raw):
         actual = route(expanded, host=host)
         require(actual == expected, f"Route {host}: expected {expected}, got {actual}")
         outcomes.append({"host": host, "expected": expected, "actual": actual})
-    for ip, expected in [("192.168.8.8", "DIRECT"), ("10.20.30.40", "DIRECT"),
+    for ip, expected in [("100.123.3.89", "TAILSCALE"), ("192.168.8.8", "DIRECT"), ("10.20.30.40", "DIRECT"),
                          ("149.154.167.51", "Telegram")]:
         actual = route(expanded, ip=ip)
         require(actual == expected, f"IP route {ip}: {actual}")
