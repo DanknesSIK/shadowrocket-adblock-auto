@@ -1,8 +1,8 @@
 {
-  "validated_at": "2026-11-22T21:21:23.542207+08:00",
+  "validated_at": "2026-11-23T00:03:49.371813+08:00",
   "profile": "profiles/FengGe.conf",
-  "profile_bytes": 15287,
-  "profile_sha256": "8dd5f58ac3b3fef5218870ab9debc685f814110c9fc92b1d6b45fe2681fa1f80",
+  "profile_bytes": 15209,
+  "profile_sha256": "5a37967dccda6c2412329d89a2b191d40b4b93b5e71fd4f2de71c466999bbf35",
   "groups": 27,
   "local_rule_lines": 138,
   "remote_files": 18,
@@ -166,13 +166,13 @@
   "route_samples": [
     {
       "host": "hermes.staru.icu",
-      "expected": "REJECT",
-      "actual": "REJECT"
+      "expected": "TAILSCALE",
+      "actual": "TAILSCALE"
     },
     {
       "host": "secure.staru.icu",
-      "expected": "REJECT",
-      "actual": "REJECT"
+      "expected": "TAILSCALE",
+      "actual": "TAILSCALE"
     },
     {
       "host": "nas.local",
@@ -551,8 +551,8 @@
   },
   "emergency_profile": {
     "path": "profiles/FengGe-Emergency.conf",
-    "bytes": 6426,
-    "sha256": "668da1f2c9f71adac55ce96569cba9eb9b6f9853e5771c27e36ff9d89557a2a1",
+    "bytes": 6437,
+    "sha256": "442441be8f9f80047e583b203f3a05492daa6abb6c80d26ec71d94bc133ce23e",
     "sample_checks_passed": 10
   }
 }
