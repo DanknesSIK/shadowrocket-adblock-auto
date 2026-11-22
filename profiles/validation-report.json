@@ -1,14 +1,14 @@
 {
-  "validated_at": "2026-11-21T02:29:50.521688+08:00",
+  "validated_at": "2026-11-22T19:50:05.683305+08:00",
   "profile": "profiles/FengGe.conf",
-  "profile_bytes": 14656,
-  "profile_sha256": "76ba4e94520a67c4d28f0ab56b3a71f6723027629a98048ef38bcac594d4d248",
+  "profile_bytes": 15133,
+  "profile_sha256": "fba1f9815794064fc28c75162e61ff0846c5520238ddc38991d3a5b5b794e0d9",
   "groups": 27,
-  "local_rule_lines": 135,
+  "local_rule_lines": 138,
   "remote_files": 18,
-  "expanded_rule_entries": 47774,
+  "expanded_rule_entries": 47777,
   "remote_bytes": 823020,
-  "sample_checks_passed": 72,
+  "sample_checks_passed": 75,
   "device_tested": false,
   "upstream_commit": "0b6897dc17e0c513d25449c935a9694818e32f0c",
   "limitations": [
@@ -164,6 +164,16 @@
     }
   ],
   "route_samples": [
+    {
+      "host": "hermes.staru.icu",
+      "expected": "TAILSCALE",
+      "actual": "TAILSCALE"
+    },
+    {
+      "host": "secure.staru.icu",
+      "expected": "TAILSCALE",
+      "actual": "TAILSCALE"
+    },
     {
       "host": "nas.local",
       "expected": "DIRECT",
@@ -495,6 +505,11 @@
       "actual": "DIRECT"
     },
     {
+      "ip": "100.123.3.89",
+      "expected": "TAILSCALE",
+      "actual": "TAILSCALE"
+    },
+    {
       "ip": "192.168.8.8",
       "expected": "DIRECT",
       "actual": "DIRECT"
@@ -536,8 +551,8 @@
   },
   "emergency_profile": {
     "path": "profiles/FengGe-Emergency.conf",
-    "bytes": 6232,
-    "sha256": "4ebb2efc998f2cdcfdd4ed25397ac19421e51f367e6396d94358642c865d1659",
+    "bytes": 6437,
+    "sha256": "442441be8f9f80047e583b203f3a05492daa6abb6c80d26ec71d94bc133ce23e",
     "sample_checks_passed": 10
   }
 }
