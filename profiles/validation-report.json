@@ -1,8 +1,8 @@
 {
-  "validated_at": "2026-11-22T19:50:05.683305+08:00",
+  "validated_at": "2026-11-22T20:53:23.869540+08:00",
   "profile": "profiles/FengGe.conf",
-  "profile_bytes": 15133,
-  "profile_sha256": "fba1f9815794064fc28c75162e61ff0846c5520238ddc38991d3a5b5b794e0d9",
+  "profile_bytes": 15235,
+  "profile_sha256": "5d3563ba84ab75baf0ef449ecad58de6bd98b7ee975133ff780c55b0a215970d",
   "groups": 27,
   "local_rule_lines": 138,
   "remote_files": 18,
@@ -551,8 +551,8 @@
   },
   "emergency_profile": {
     "path": "profiles/FengGe-Emergency.conf",
-    "bytes": 6437,
-    "sha256": "442441be8f9f80047e583b203f3a05492daa6abb6c80d26ec71d94bc133ce23e",
+    "bytes": 6451,
+    "sha256": "2c6aea3972d4da00dcbdf2c20bf5af678d3bbf2f2ba883924f9e3230644a28fb",
     "sample_checks_passed": 10
   }
 }
