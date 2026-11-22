@@ -70,11 +70,11 @@ ChatGPT、OpenAI 接口及已收录登录、静态资源、语音域名使用 `C
 
 ## NAS、Hermes 与 Tailscale
 
-局域网 IP、`.local`、`.lan`、`.home.arpa`、群晖和 QuickConnect 域名直连。`ts.net` 域名交给 `Hermes内网`。`hermes.staru.icu`、`secure.staru.icu` 通过各自的 `[Host]` 项指定 `server:100.123.3.89` 私网 DNS，该解析器返回同一私网 IP；网页连接以最高优先级直接匹配 `TAILSCALE`，不受 `Hermes内网` 分组手动选择影响。精确 `/32` 规则只覆盖这一台管理入口，不接管其他 CGNAT 地址。`api.staru.icu` 保持普通公网分流。
+局域网 IP、`.local`、`.lan`、`.home.arpa`、群晖和 QuickConnect 域名直连。`ts.net` 域名交给 `Hermes内网`。`hermes.staru.icu`、`secure.staru.icu` 通过各自的 `[Host]` 项直接映射到私网 IP `100.123.3.89`；网页连接以最高优先级直接匹配 `TAILSCALE`，不受 `Hermes内网` 分组手动选择影响。精确 `/32` 规则只覆盖这一台管理入口，不接管其他 CGNAT 地址。`api.staru.icu` 保持普通公网分流。
 
 这条分流规则不会自动开启、认证或修复 Tailscale。需要访问 tailnet 时，在 Shadowrocket 的内置 Tailscale 设置中完成认证并确认连接；通常无需设置 Tailscale 出口节点。不要依靠同时开启两个独立 VPN 来实现这条规则。
 
-主配置包含 `use-local-host-item-for-proxy = true`，使本地 Host 设定对代理策略生效。两个管理域名使用指定的私网 DNS，不依赖内置模块是否自动采纳后台 Split DNS。更新后重新启用配置、重连小火箭，再访问 `https://hermes.staru.icu/_private-check`；显示 `Tailscale private connection verified` 才证明该次请求走通私网。配置发布不代表手机已更新，也不会自动认证内置 Tailscale。
+主配置包含 `use-local-host-item-for-proxy = true`，使本地 Host 设定对代理策略生效。两个管理域名直接使用静态 IP 映射，不再向私网 DNS 发起查询。更新后重新启用配置、重连小火箭，再访问 `https://hermes.staru.icu/_private-check`；显示 `Tailscale private connection verified` 才证明该次请求走通私网。配置发布不代表手机已更新，也不会自动认证内置 Tailscale。
 
 如果使用其他目标的 `100.x.x.x` 地址而非域名，或访问 Tailscale 子网路由，请在本地的 Rule 顶部添加**实际目标 /32 或实际子网**的 `TAILSCALE` 分流，并按需要启用客户端的 Tailscale 子网选项。不要把整个运营商 CGNAT 地址范围都交给 Tailscale。本配置没有旁路 `100.64.0.0/10`，也没有把该范围全部转发至 Tailscale。
 
@@ -155,3 +155,7 @@ python3 -m unittest discover -s profile_tests -v
 ## 2026-11-22 私网 DNS 对照调整
 
 私网 IP 的 HTTP 检测已经在 iPhone 上通过，但原域名 HTTPS 尚未完成验收。本轮只把两个管理域名的静态 IP 映射改为明确指定私网 DNS，保留原有 Tailscale 路由；用于核对客户端解析链路。不得将静态检查通过或 IP 检测通过写成原域名 HTTPS 已恢复。手机当前测试需保留“始终使用 DERP”，是否能恢复自动路径需另行验证。
+
+## 2026-11-22 恢复静态映射对照
+
+手机已确认加载指定私网 DNS 的版本，但域名 HTTPS 仍失败。本轮将两个管理域名恢复为直接映射 100.123.3.89，绕过私网 DNS 查询，保持 Tailscale 分流。此操作是定位测试，尚不能宣称恢复；更新手机配置并重新连接后验证原域名。

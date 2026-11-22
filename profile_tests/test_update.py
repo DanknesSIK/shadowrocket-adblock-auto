@@ -139,7 +139,7 @@ class UpdateTests(unittest.TestCase):
         general = dict(line.split(" = ", 1) for line in sections["General"])
         self.assertEqual(general["use-local-host-item-for-proxy"], "true")
         for host in ("hermes.staru.icu", "secure.staru.icu"):
-            self.assertEqual(mappings[host], "server:100.123.3.89")
+            self.assertEqual(mappings[host], "100.123.3.89")
             self.assertEqual(validator.route(rules, host=host, country="CN"), "TAILSCALE")
         self.assertEqual(validator.route(rules, ip="100.123.3.89", country="CN"), "TAILSCALE")
         self.assertNotEqual(validator.route(rules, host="api.staru.icu", country="CN"), "TAILSCALE")
