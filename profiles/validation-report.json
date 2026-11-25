@@ -1,14 +1,14 @@
 {
-  "validated_at": "2026-11-23T00:03:49.371813+08:00",
+  "validated_at": "2026-11-25T12:16:19.675225+08:00",
   "profile": "profiles/FengGe.conf",
-  "profile_bytes": 15209,
-  "profile_sha256": "5a37967dccda6c2412329d89a2b191d40b4b93b5e71fd4f2de71c466999bbf35",
+  "profile_bytes": 15379,
+  "profile_sha256": "c390c5c0bdc17df638ed1d65c0b87cecf642dc4539aa10af682a9057986ca904",
   "groups": 27,
-  "local_rule_lines": 138,
+  "local_rule_lines": 139,
   "remote_files": 18,
-  "expanded_rule_entries": 47777,
+  "expanded_rule_entries": 47778,
   "remote_bytes": 823020,
-  "sample_checks_passed": 75,
+  "sample_checks_passed": 77,
   "device_tested": false,
   "upstream_commit": "0b6897dc17e0c513d25449c935a9694818e32f0c",
   "limitations": [
@@ -460,6 +460,16 @@
       "actual": "PikPak自动"
     },
     {
+      "host": "pikpak.me",
+      "expected": "PikPak自动",
+      "actual": "PikPak自动"
+    },
+    {
+      "host": "adx.ads.heytapmobi.com",
+      "expected": "REJECT",
+      "actual": "REJECT"
+    },
+    {
       "host": "oaistatic.com",
       "expected": "ChatGPT自动",
       "actual": "ChatGPT自动"
@@ -551,8 +561,8 @@
   },
   "emergency_profile": {
     "path": "profiles/FengGe-Emergency.conf",
-    "bytes": 6437,
-    "sha256": "442441be8f9f80047e583b203f3a05492daa6abb6c80d26ec71d94bc133ce23e",
+    "bytes": 6480,
+    "sha256": "3c0ccdb58eb0d2b48342c92eada9ef4929e927882f5bdf52271d8d3e74402166",
     "sample_checks_passed": 10
   }
 }
