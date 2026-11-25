@@ -1,0 +1,57 @@
+{
+  "acl": {
+    "repo": "ACL4SSR/ACL4SSR",
+    "ref": "master",
+    "paths": [
+      "Clash/LocalAreaNetwork.list",
+      "Clash/UnBan.list",
+      "Clash/BanAD.list",
+      "Clash/BanProgramAD.list",
+      "Clash/Ruleset/GoogleFCM.list",
+      "Clash/GoogleCN.list",
+      "Clash/Ruleset/SteamCN.list",
+      "Clash/Bing.list",
+      "Clash/OneDrive.list",
+      "Clash/Microsoft.list",
+      "Clash/Apple.list",
+      "Clash/Telegram.list",
+      "Clash/Ruleset/AI.list",
+      "Clash/Ruleset/OpenAi.list",
+      "Clash/Ruleset/NetEaseMusic.list",
+      "Clash/Ruleset/Epic.list",
+      "Clash/Ruleset/Origin.list",
+      "Clash/Ruleset/Sony.list",
+      "Clash/Ruleset/Steam.list",
+      "Clash/Ruleset/Nintendo.list",
+      "Clash/Ruleset/YouTube.list",
+      "Clash/Ruleset/Netflix.list",
+      "Clash/Ruleset/Bahamut.list",
+      "Clash/Ruleset/BilibiliHMT.list",
+      "Clash/Ruleset/Bilibili.list",
+      "Clash/ChinaMedia.list",
+      "Clash/ProxyMedia.list",
+      "Clash/ProxyGFWlist.list",
+      "Clash/ChinaDomain.list",
+      "Clash/ChinaCompanyIp.list",
+      "Clash/Download.list"
+    ]
+  },
+  "pikpak": {
+    "repo": "blackmatrix7/ios_rule_script",
+    "ref": "master",
+    "path": "rule/Clash/PikPak/PikPak.yaml"
+  },
+  "consumer": {
+    "refreshSeconds": 86400,
+    "adRule": "DOMAIN,adx.ads.heytapmobi.com,REJECT",
+    "pikpakGroup": "PikPak-Auto",
+    "pikpakRequired": [
+      "DOMAIN-KEYWORD,mypikpak",
+      "DOMAIN-SUFFIX,pikpak.me"
+    ],
+    "healthUrl": "https://www.gstatic.com/generate_204",
+    "testIntervalSeconds": 300,
+    "toleranceMs": 30,
+    "excludeFilter": "(?i)^(DIRECT|REJECT(-DROP)?|PASS|COMPATIBLE)$|剩余流量|套餐到期|距离下次重置"
+  }
+}

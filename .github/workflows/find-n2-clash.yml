@@ -1,0 +1,39 @@
+name: Sync Find N2 Clash rules
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 1 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'clash-meta/find-n2/sources.json'
+      - 'clash-meta/find-n2/sync.mjs'
+      - 'clash-meta/find-n2/apply.mjs'
+      - '.github/workflows/find-n2-clash.yml'
+permissions:
+  contents: write
+concurrency:
+  group: shadowrocket-adblock-auto
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check clash-meta/find-n2/apply.mjs
+      - name: Build checked upstream snapshot
+        run: node clash-meta/find-n2/sync.mjs
+      - name: Publish checked rule mirror
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- clash-meta/find-n2/mirror clash-meta/find-n2/upstream-status.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: sync checked Find N2 Clash rules"
+          git push origin HEAD:main
