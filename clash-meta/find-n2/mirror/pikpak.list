@@ -1,0 +1,11 @@
+# PikPak rules derived from blackmatrix7/ios_rule_script; original author: tugepaopao.
+# Source: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Clash/PikPak/PikPak.yaml
+# See licenses/blackmatrix7-LICENSE. Two service domains are ensured locally.
+DOMAIN-KEYWORD,mypikpak
+DOMAIN-SUFFIX,dlandroid.rcv.sandai.net
+DOMAIN-SUFFIX,hub5idx.v6.shub.sandai.net
+DOMAIN-SUFFIX,hub5pn.wap.sandai.net
+DOMAIN-SUFFIX,hub5pnc.sandai.net
+DOMAIN-SUFFIX,hub5pr.v6.phub.sandai.net
+DOMAIN-SUFFIX,hubciddata.sandai.net
+DOMAIN-SUFFIX,pikpak.me
