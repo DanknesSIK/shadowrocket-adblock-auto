@@ -1,0 +1,24 @@
+# Merge these entries into an existing profile.
+proxy-groups:
+  - name: PikPak-Auto
+    type: url-test
+    use: [subscription]
+    exclude-filter: '(?i)^(DIRECT|REJECT(-DROP)?|PASS|COMPATIBLE)$|剩余流量|套餐到期|距离下次重置|重置时间|^网址[:：]|^回家页[:：]'
+    url: https://www.gstatic.com/generate_204
+    expected-status: 204
+    interval: 300
+    tolerance: 30
+    lazy: true
+
+rule-providers:
+  shared-pikpak:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/noir-pikpak.list
+    url: https://raw.githubusercontent.com/DanknesSIK/shadowrocket-adblock-auto/main/clash-meta/find-n2/mirror/pikpak.list
+    interval: 86400
+
+rules:
+  - DOMAIN,adx.ads.heytapmobi.com,REJECT
+  - RULE-SET,shared-pikpak,PikPak-Auto

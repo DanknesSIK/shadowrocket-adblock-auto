@@ -1,6 +1,7 @@
 import copy
 import hashlib
 import json
+import shutil
 import sys
 import tempfile
 import unittest
@@ -14,7 +15,8 @@ import update_profile as updater
 import validate_profile as validator
 
 SHA = "a" * 40
-TEMPLATE = (ROOT / "templates/FengGe.conf").read_text(encoding="utf-8")
+SOURCE_TEMPLATE = (ROOT / "templates/FengGe.conf").read_text(encoding="utf-8")
+TEMPLATE = updater.render_shared_rules(SOURCE_TEMPLATE, ROOT)
 
 
 def report(raw):
@@ -41,7 +43,11 @@ class UpdateTests(unittest.TestCase):
         root = Path(temporary.name)
         (root / "templates").mkdir()
         (root / "profiles").mkdir()
-        (root / "templates/FengGe.conf").write_text(TEMPLATE, encoding="utf-8")
+        (root / "templates/FengGe.conf").write_text(SOURCE_TEMPLATE, encoding="utf-8")
+        for name in ("sources.json", "mirror/pikpak.list"):
+            source = Path("clash-meta/find-n2") / name
+            (root / source).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / source, root / source)
         (root / "profiles/FengGe.conf").write_bytes(raw)
         (root / "profiles/validation-report.json").write_text(json.dumps(report(raw)))
         return root
@@ -53,6 +59,14 @@ class UpdateTests(unittest.TestCase):
         self.assertEqual(len(refs), 18)
         self.assertTrue(all(validator.SOURCE_PATTERN.fullmatch(u).group(1) == SHA for u in refs))
         self.assertNotIn("/master/rule/", raw.decode())
+
+    def test_rejects_invalid_shared_list_before_publish(self):
+        root = self.workspace(TEMPLATE.encode())
+        path = root / "clash-meta/find-n2/mirror/pikpak.list"
+        path.write_text(path.read_text(encoding="utf-8") + "\nIP-CIDR,0.0.0.0/0\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "Unsupported PikPak rule"):
+            updater.update(root, SHA)
+        self.assertEqual((root / "profiles/FengGe.conf").read_bytes(), TEMPLATE.encode())
 
     def test_fetch_rejects_floating_or_unapproved_sources(self):
         with patch("validate_profile.urllib.request.urlopen") as network:

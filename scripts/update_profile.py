@@ -45,6 +45,27 @@ def pin(text, sha):
     return result.encode("utf-8")
 
 
+def render_shared_rules(text, root):
+    """Embed rules from the same checked snapshot used by Mihomo clients."""
+    shared = root / "clash-meta/find-n2"
+    consumer = json.loads((shared / "sources.json").read_text(encoding="utf-8"))["consumer"]
+    rows = [line.strip() for line in (shared / "mirror/pikpak.list").read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.lstrip().startswith("#")]
+    require(0 < len(rows) <= 100 and len(set(rows)) == len(rows), "Unexpected PikPak list size or duplicates")
+    require(set(consumer["pikpakRequired"]).issubset(rows), "Missing required PikPak rule")
+    require(all(re.fullmatch(r"DOMAIN(?:-SUFFIX|-KEYWORD)?,[a-z0-9.-]+", row) for row in rows),
+            "Unsupported PikPak rule")
+    ad_rule = consumer["adRule"]
+    require(re.fullmatch(r"DOMAIN,[a-z0-9.-]+,REJECT", ad_rule), "Invalid exact ad reject rule")
+    for marker, value in {
+        "# @shared-pikpak": "\n".join(row + ",PikPak自动" for row in rows),
+        "# @shared-ad-reject": ad_rule,
+    }.items():
+        require(text.splitlines().count(marker) == 1, "Missing or repeated template marker: " + marker)
+        text = text.replace(marker, value)
+    return text
+
+
 def source_key(source):
     return source["url"].split("/rule/Shadowrocket/", 1)[1]
 
@@ -75,7 +96,7 @@ def emergency_profile(raw):
     lines = [
         "# 凤歌应急配置 | 无远程规则、无脚本、无解密、无自动测速",
         "# 首页选择可用节点，全局路由选择配置；停用所有旧模块。",
-        "# 仅保留本地基础分流。没有广告过滤，不能替代完整主配置。",
+        "# 仅保留本地基础分流和明确的拒绝项。完整广告过滤需使用主配置。",
         "# 只使用系统 DNS；不启用或自动关闭客户端全局 Tailscale 设置。",
         "# 局域网 NAS 可用，远程 ts.net 访问被拒绝，避免误送到公共代理。",
         "# 如需排查 Tailscale，请在客户端手动关闭其全局开关。",
@@ -155,7 +176,8 @@ def update(root=ROOT, sha=None):
         require(digest(old_raw) == old_report["profile_sha256"],
                 "Published file differs from its report; edit templates/FengGe.conf instead")
     revision = sha or current_upstream()
-    candidate = pin((root / "templates/FengGe.conf").read_text(encoding="utf-8"), revision)
+    template = (root / "templates/FengGe.conf").read_text(encoding="utf-8")
+    candidate = pin(render_shared_rules(template, root), revision)
     report = validate(candidate)
     check_budget(report, old_report)
     emergency = emergency_profile(candidate)
