@@ -23,3 +23,7 @@ node clash-meta/find-n2/apply.mjs ACL4SSR-original.yaml FindN2-ACL4SSR.yaml
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)，CC BY-SA 4.0。镜像保留源文件和许可。
 - [blackmatrix7/ios_rule_script 的 PikPak 规则](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PikPak)，GPL-2.0，源文件标注作者为 tugepaopao。镜像转换为 Clash classical 文本、去重并补齐服务域名。生成脚本及修改在本目录可查。
 - [自动更新记录](../../actions/workflows/find-n2-clash.yml)
+
+## 可选共享域名规则
+
+[同花顺直连](../shared/ths-direct.list) 和 [ChatGPT](../shared/chatgpt.list) 可按 [Mihomo 配置片段](../flclash/shared-rules.yaml) 加入已有配置。使用原配置的提供器名称。验证 ChatGPT 策略组已加载可用非香港节点，再启用相关分流。筛选依据是节点名称。

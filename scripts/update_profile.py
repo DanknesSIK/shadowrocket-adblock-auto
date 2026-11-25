@@ -45,21 +45,30 @@ def pin(text, sha):
     return result.encode("utf-8")
 
 
+def read_shared_domains(path):
+    rows = [line.strip() for line in path.read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.lstrip().startswith("#")]
+    require(0 < len(rows) <= 100 and len(set(rows)) == len(rows), "Unexpected list size or duplicates: " + path.name)
+    require(all(re.fullmatch(r"DOMAIN(?:-SUFFIX|-KEYWORD)?,[a-z0-9.-]+", row) for row in rows),
+            "Unsupported shared domain rule: " + path.name)
+    return rows
+
+
 def render_shared_rules(text, root):
     """Embed rules from the same checked snapshot used by Mihomo clients."""
     shared = root / "clash-meta/find-n2"
     consumer = json.loads((shared / "sources.json").read_text(encoding="utf-8"))["consumer"]
-    rows = [line.strip() for line in (shared / "mirror/pikpak.list").read_text(encoding="utf-8").splitlines()
-            if line.strip() and not line.lstrip().startswith("#")]
-    require(0 < len(rows) <= 100 and len(set(rows)) == len(rows), "Unexpected PikPak list size or duplicates")
-    require(set(consumer["pikpakRequired"]).issubset(rows), "Missing required PikPak rule")
-    require(all(re.fullmatch(r"DOMAIN(?:-SUFFIX|-KEYWORD)?,[a-z0-9.-]+", row) for row in rows),
-            "Unsupported PikPak rule")
+    pikpak = read_shared_domains(shared / "mirror/pikpak.list")
+    require(set(consumer["pikpakRequired"]).issubset(pikpak), "Missing required PikPak rule")
+    ths = read_shared_domains(root / "clash-meta/shared/ths-direct.list")
+    chatgpt = read_shared_domains(root / "clash-meta/shared/chatgpt.list")
     ad_rule = consumer["adRule"]
     require(re.fullmatch(r"DOMAIN,[a-z0-9.-]+,REJECT", ad_rule), "Invalid exact ad reject rule")
     for marker, value in {
-        "# @shared-pikpak": "\n".join(row + ",PikPak自动" for row in rows),
+        "# @shared-pikpak": "\n".join(row + ",PikPak自动" for row in pikpak),
         "# @shared-ad-reject": ad_rule,
+        "# @shared-ths": "\n".join(row + ",DIRECT" for row in ths),
+        "# @shared-chatgpt": "\n".join(row + ",ChatGPT自动" for row in chatgpt),
     }.items():
         require(text.splitlines().count(marker) == 1, "Missing or repeated template marker: " + marker)
         text = text.replace(marker, value)

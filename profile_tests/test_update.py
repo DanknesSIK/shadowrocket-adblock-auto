@@ -44,8 +44,9 @@ class UpdateTests(unittest.TestCase):
         (root / "templates").mkdir()
         (root / "profiles").mkdir()
         (root / "templates/FengGe.conf").write_text(SOURCE_TEMPLATE, encoding="utf-8")
-        for name in ("sources.json", "mirror/pikpak.list"):
-            source = Path("clash-meta/find-n2") / name
+        for name in ("find-n2/sources.json", "find-n2/mirror/pikpak.list",
+                     "shared/ths-direct.list", "shared/chatgpt.list"):
+            source = Path("clash-meta") / name
             (root / source).parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / source, root / source)
         (root / "profiles/FengGe.conf").write_bytes(raw)
@@ -64,7 +65,7 @@ class UpdateTests(unittest.TestCase):
         root = self.workspace(TEMPLATE.encode())
         path = root / "clash-meta/find-n2/mirror/pikpak.list"
         path.write_text(path.read_text(encoding="utf-8") + "\nIP-CIDR,0.0.0.0/0\n", encoding="utf-8")
-        with self.assertRaisesRegex(ValueError, "Unsupported PikPak rule"):
+        with self.assertRaisesRegex(ValueError, "Unsupported shared domain rule"):
             updater.update(root, SHA)
         self.assertEqual((root / "profiles/FengGe.conf").read_bytes(), TEMPLATE.encode())
 
