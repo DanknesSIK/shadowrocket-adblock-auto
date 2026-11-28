@@ -45,6 +45,7 @@
     "refreshSeconds": 86400,
     "adRule": "DOMAIN,adx.ads.heytapmobi.com,REJECT",
     "pikpakGroup": "PikPak-Auto",
+    "pikpakSelector": "PikPak-Select",
     "pikpakRequired": [
       "DOMAIN-KEYWORD,mypikpak",
       "DOMAIN-SUFFIX,pikpak.me"
@@ -56,6 +57,7 @@
     "excludeFilter": "(?i)^(DIRECT|REJECT(-DROP)?|PASS|COMPATIBLE)$|剩余流量|套餐到期|距离下次重置|重置时间|^网址[:：]|^回家页[:：]",
     "chatgpt": {
       "group": "ChatGPT-NonHK",
+      "selector": "ChatGPT-Select",
       "healthUrl": "https://www.gstatic.com/generate_204",
       "healthStatus": 204,
       "testIntervalSeconds": 300,

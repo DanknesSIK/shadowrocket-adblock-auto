@@ -20,11 +20,15 @@ function topLevelBlock(input, name) {
   return block;
 }
 
+function sequenceValue(value) {
+  return value.replace(/[ \t]+#.*$/, '').trim().replace(/^(['"])(.*)\1$/, '$2');
+}
+
 function sequenceValues(block) {
   const first = /^([ \t]*)-[ \t]+/m.exec(block);
   if (!first) throw new Error('Missing block sequence');
   return [...block.matchAll(new RegExp('^' + first[1] + '-[ \\t]+([^\\r\\n]+)', 'gm'))]
-    .map(match => match[1].replace(/[ \t]+#.*$/, '').trim().replace(/^(['"])(.*)\1$/, '$2'));
+    .map(match => sequenceValue(match[1]));
 }
 
 function prependSequence(input, name, lines) {
@@ -50,7 +54,19 @@ function autoGroup(name, policy, lazy) {
   ];
 }
 
+function selectorGroup(name, auto, excludeFilter) {
+  return [
+    '- name: ' + name,
+    '  type: select',
+    '  proxies: [' + auto + ']',
+    '  include-all: true',
+    "  exclude-filter: '" + excludeFilter + "'",
+    '  empty-fallback: REJECT'
+  ];
+}
+
 const pikpak = settings.pikpakGroup;
+const pikpakSelector = settings.pikpakSelector;
 const { chatgpt } = settings;
 const existingGroups = sequenceValues(topLevelBlock(clean, 'proxy-groups')[0])
   .map(value => {
@@ -60,11 +76,28 @@ const existingGroups = sequenceValues(topLevelBlock(clean, 'proxy-groups')[0])
 const newGroups = [];
 if (!existingGroups.includes(pikpak)) newGroups.push(...autoGroup(pikpak, settings, false));
 if (!existingGroups.includes(chatgpt.group)) newGroups.push(...autoGroup(chatgpt.group, chatgpt, true));
+if (!existingGroups.includes(pikpakSelector)) newGroups.push(...selectorGroup(pikpakSelector, pikpak, settings.excludeFilter));
+if (!existingGroups.includes(chatgpt.selector)) newGroups.push(...selectorGroup(chatgpt.selector, chatgpt.group, chatgpt.excludeFilter));
 let result = prependSequence(clean, 'proxy-groups', newGroups);
 
-const existingRules = sequenceValues(topLevelBlock(result, 'rules')[0]);
-const managedRules = [settings.adRule, 'RULE-SET,noir-pikpak,' + pikpak, 'RULE-SET,shared-chatgpt,' + chatgpt.group];
-const newRules = managedRules.filter(rule => !existingRules.includes(rule));
+const knownRoutes = new Map([
+  ['RULE-SET,noir-pikpak,' + pikpak, 'RULE-SET,noir-pikpak,' + pikpakSelector],
+  ['RULE-SET,shared-chatgpt,' + chatgpt.group, 'RULE-SET,shared-chatgpt,' + chatgpt.selector]
+]);
+const managedRoutes = new Set(knownRoutes.values());
+const seenRoutes = new Set();
+const rulesBlock = topLevelBlock(result, 'rules');
+const updatedRules = rulesBlock[0].replace(/^([ \t]*-[ \t]+)([^\r\n]+)(\r?\n|$)/gm, (line, prefix, value, ending) => {
+  const oldRule = sequenceValue(value);
+  const rule = knownRoutes.get(oldRule) ?? oldRule;
+  if (!managedRoutes.has(rule)) return line;
+  if (seenRoutes.has(rule)) return '';
+  seenRoutes.add(rule);
+  return prefix + value.replace(oldRule, () => rule) + ending;
+});
+result = result.slice(0, rulesBlock.index) + updatedRules + result.slice(rulesBlock.index + rulesBlock[0].length);
+const existingRules = sequenceValues(updatedRules);
+const newRules = [settings.adRule, ...managedRoutes].filter(rule => !existingRules.includes(rule));
 result = prependSequence(result, 'rules', newRules.map(rule => '- ' + rule));
 
 const match = topLevelBlock(result, 'rule-providers');
@@ -97,4 +130,4 @@ for (const [name, filename, location] of [
 result = result.slice(0, match.index) + providers + result.slice(match.index + match[0].length);
 
 await writeFile(output, result, { flag: 'wx' });
-console.log('Prepared a private local profile with PikPak-Auto and ChatGPT-NonHK.');
+console.log('Prepared a private local profile with automatic and manual choices for PikPak and ChatGPT.');

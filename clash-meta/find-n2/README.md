@@ -3,16 +3,17 @@
 本目录维护 Find N2 的公开分流层。完整配置在本机用现有 ACL4SSR YAML 与这一层合成。节点、订阅链接、账户参数以及设备审计数据都由本机保管。
 
 - 精确拒绝 `adx.ads.heytapmobi.com`。
-- PikPak 走 `PikPak-Auto`。策略组汇集配置内节点和各订阅的真实节点，探测 [PikPak 官方 FAQ](https://mypikpak.com/en-US/faq)，以 HTTP 200 判断探测成功，按实测延迟自动选节点，切换容差为 150 毫秒。
+- PikPak 走 `PikPak-Select`，默认委托给 `PikPak-Auto`。自动组汇集配置内节点和各订阅的真实节点，探测 [PikPak 官方 FAQ](https://mypikpak.com/en-US/faq)，以 HTTP 200 判断探测成功，按实测延迟自动选节点，切换容差为 150 毫秒。
 - 策略组的测速间隔设为 30 分钟。已有健康检查的订阅提供器沿用自身的检查周期及按需设置。延迟反映官网探测响应时间，下载和播放速度还取决于实际文件线路。策略组为空时使用 `REJECT`。
-- ChatGPT 走 `ChatGPT-NonHK`，按节点名称排除香港线路，并自动测速选择其他可用节点。节点全被筛除时使用 `REJECT`。香港节点仍可用于 PikPak。
+- ChatGPT 走 `ChatGPT-Select`，默认委托给 `ChatGPT-NonHK`。自动和手动选择均按节点名称排除香港线路。无非香港候选节点时，自动组使用 `REJECT`。香港节点仍可用于 PikPak。
+- 在 Clash Meta 的「代理」页进入 `PikPak-Select` 或 `ChatGPT-Select`，点具体节点即手动切换。点回 `PikPak-Auto` 或 `ChatGPT-NonHK` 可恢复自动选择。
 - 按设备原配置镜像 31 份 ACL4SSR 列表。对 PikPak 独立规则保留 `mypikpak` 和 `pikpak.me` 的匹配。
 - GitHub Actions 每天北京时间约 09:23 检查上游提交，校验格式、数量和许可，再用一次提交发布。失败时 GitHub 上保留上一次成功的规则。定时运行可能延迟。
 - Clash Meta 从固定的镜像地址刷新规则提供者，间隔为 24 小时。设备必须先导入本机生成的配置并运行。公开规则更新无需重新导入。配置组这类结构性变更需要重新生成和导入。
 
 ## 在本机生成完整配置
 
-使用当前配置的 YAML 导出或原始「ACL4SSR 整包」配置。脚本生成一份新文件，补上缺少的策略组和规则，也保留同名策略组的自定义参数。生成文件含自己的节点信息，请仅留在自己的设备。
+使用当前配置的 YAML 导出或原始「ACL4SSR 整包」配置。脚本生成一份新文件，补上缺少的策略组和规则。已有分流规则会指向对应的可选组，原自动组的参数继续沿用。生成文件含自己的节点信息，请仅留在自己的设备。
 
 ```bash
 node clash-meta/find-n2/apply.mjs Current-ACL4SSR.yaml FindN2-ACL4SSR.yaml
