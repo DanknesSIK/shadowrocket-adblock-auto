@@ -49,9 +49,10 @@
       "DOMAIN-KEYWORD,mypikpak",
       "DOMAIN-SUFFIX,pikpak.me"
     ],
-    "healthUrl": "https://www.gstatic.com/generate_204",
+    "healthUrl": "https://mypikpak.com/en-US/faq",
+    "healthStatus": 200,
     "testIntervalSeconds": 300,
-    "toleranceMs": 30,
-    "excludeFilter": "(?i)^(DIRECT|REJECT(-DROP)?|PASS|COMPATIBLE)$|剩余流量|套餐到期|距离下次重置"
+    "toleranceMs": 0,
+    "excludeFilter": "(?i)^(DIRECT|REJECT(-DROP)?|PASS|COMPATIBLE)$|剩余流量|套餐到期|距离下次重置|重置时间|^网址[:：]|^回家页[:：]"
   }
 }

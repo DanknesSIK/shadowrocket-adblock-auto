@@ -31,10 +31,10 @@ let result = prependSequence(clean, 'proxy-groups', [
   '  include-all: true',
   "  exclude-filter: '" + settings.excludeFilter + "'",
   '  url: ' + settings.healthUrl,
-  '  expected-status: 204',
+  '  expected-status: ' + settings.healthStatus,
   '  interval: ' + settings.testIntervalSeconds,
   '  tolerance: ' + settings.toleranceMs,
-  '  lazy: true',
+  '  lazy: false',
   '  empty-fallback: REJECT'
 ]);
 result = prependSequence(result, 'rules', [
