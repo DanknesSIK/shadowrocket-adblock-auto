@@ -53,6 +53,14 @@
     "healthStatus": 200,
     "testIntervalSeconds": 1800,
     "toleranceMs": 150,
-    "excludeFilter": "(?i)^(DIRECT|REJECT(-DROP)?|PASS|COMPATIBLE)$|剩余流量|套餐到期|距离下次重置|重置时间|^网址[:：]|^回家页[:：]"
+    "excludeFilter": "(?i)^(DIRECT|REJECT(-DROP)?|PASS|COMPATIBLE)$|剩余流量|套餐到期|距离下次重置|重置时间|^网址[:：]|^回家页[:：]",
+    "chatgpt": {
+      "group": "ChatGPT-NonHK",
+      "healthUrl": "https://www.gstatic.com/generate_204",
+      "healthStatus": 204,
+      "testIntervalSeconds": 300,
+      "toleranceMs": 30,
+      "excludeFilter": "(?i)^(DIRECT|REJECT(-DROP)?|PASS|COMPATIBLE)$|港|hong[ _-]*kong|(^|[^a-z])hkg?([^a-z]|$)|🇭🇰|剩余|流量|到期|过期|套餐|官网|网址|订阅|公告"
+    }
   }
 }

@@ -14,13 +14,15 @@ proxy-groups:
 
   - name: ChatGPT-NonHK
     type: url-test
+    include-all-proxies: true
     use: [subscription]
-    exclude-filter: '(?i)香港|港|hong[ -]?kong|(^|[^a-z])hk($|[^a-z])|🇭🇰|剩余|流量|到期|过期|套餐|官网|网址|订阅|公告'
+    exclude-filter: '(?i)^(DIRECT|REJECT(-DROP)?|PASS|COMPATIBLE)$|港|hong[ _-]*kong|(^|[^a-z])hkg?([^a-z]|$)|🇭🇰|剩余|流量|到期|过期|套餐|官网|网址|订阅|公告'
     url: https://www.gstatic.com/generate_204
     expected-status: 204
     interval: 300
     tolerance: 30
     lazy: true
+    empty-fallback: REJECT
 
 rule-providers:
   shared-pikpak:
