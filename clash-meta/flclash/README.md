@@ -8,6 +8,6 @@
 4. 启用后查看 `PikPak-Auto` 是否显示真实节点。如果首次导入只显示 `REJECT` 或 `COMPATIBLE`，等节点订阅缓存建立后，切回原配置再切回来。仍为空时，检查 `use` 拼写和提供器的更新时间。
 5. 通过 FlClash 的代理访问 `https://mypikpak.com/en-US/faq` 和 `https://pikpak.me/en-US/faq`，在「连接」确认命中 `PikPak-Auto`。广告域名应命中 `REJECT`，普通 OPPO 域名可作为对照。验证 GitHub 镜像返回 HTTP 200。
 
-`PikPak-Auto` 探测 [PikPak 官方 FAQ](https://mypikpak.com/en-US/faq)，以 HTTP 200 判断探测成功。策略组的测速间隔设为 300 秒，切换容差为 0 毫秒。已有健康检查的订阅提供器沿用自身的检查周期及按需设置。延迟反映官网探测响应时间，下载和播放速度还取决于实际文件线路。
+`PikPak-Auto` 探测 [PikPak 官方 FAQ](https://mypikpak.com/en-US/faq)，以 HTTP 200 判断探测成功。策略组的测速间隔设为 30 分钟，切换容差为 150 毫秒。已有健康检查的订阅提供器沿用自身的检查周期及按需设置。延迟反映官网探测响应时间，下载和播放速度还取决于实际文件线路。
 
 PikPak 镜像由 [Find N2 同步流程](../find-n2/README.md) 刷新，Shadowrocket 构建时也读取同一份镜像。精确广告拒绝项由 [共享清单](../find-n2/sources.json) 定义。更新清单中的广告项时同步更新本片段的精确规则。[ChatGPT](../shared/chatgpt.list) 和 [同花顺](../shared/ths-direct.list) 规则也供 Shadowrocket 使用。新增的 ChatGPT 组按节点名称排除香港，启用前确认至少有一个可用非香港节点。ChatGPT 组和同花顺远程提供器需在设备上验证。

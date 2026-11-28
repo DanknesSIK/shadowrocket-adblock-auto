@@ -7,8 +7,8 @@ proxy-groups:
     exclude-filter: '(?i)^(DIRECT|REJECT(-DROP)?|PASS|COMPATIBLE)$|剩余流量|套餐到期|距离下次重置|重置时间|^网址[:：]|^回家页[:：]'
     url: https://mypikpak.com/en-US/faq
     expected-status: 200
-    interval: 300
-    tolerance: 0
+    interval: 1800
+    tolerance: 150
     lazy: false
     empty-fallback: REJECT
 
