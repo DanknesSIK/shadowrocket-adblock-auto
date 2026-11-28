@@ -1,6 +1,6 @@
 {
   "sources": {
-    "ACL4SSR/ACL4SSR": "a7bdd9c97c3c4a1d01a7259bba7c23c275794cc7",
+    "ACL4SSR/ACL4SSR": "384af1b35d29df946013cf8912db1c3e40935ce5",
     "blackmatrix7/ios_rule_script": "0b6897dc17e0c513d25449c935a9694818e32f0c"
   },
   "files": [
@@ -16,8 +16,8 @@
     },
     {
       "path": "acl4ssr/Clash/BanAD.list",
-      "rules": 590,
-      "sha256": "110117815a28fba39adcd32da1c6cf2c8b61b4a8e910ef5afdf965647bdc72a9"
+      "rules": 589,
+      "sha256": "8e9ac673d8f8d51a52595127f7c80ef65c288c372b0df363f0b62812990ab979"
     },
     {
       "path": "acl4ssr/Clash/BanProgramAD.list",
@@ -36,8 +36,8 @@
     },
     {
       "path": "acl4ssr/Clash/Ruleset/SteamCN.list",
-      "rules": 16,
-      "sha256": "bf135f78199fbadcb663a047d70eb59ec81bead3a04cfe050036e2921c2ea607"
+      "rules": 17,
+      "sha256": "2581f7b3dfeb9af09ecc42b86755771a986a48f1a56b193c7839509428d03165"
     },
     {
       "path": "acl4ssr/Clash/Bing.list",
@@ -96,8 +96,8 @@
     },
     {
       "path": "acl4ssr/Clash/Ruleset/Steam.list",
-      "rules": 18,
-      "sha256": "0abad0ae490ec9b7bf0cf880f83c5229949b14cc5df448c00a0516225a16b011"
+      "rules": 17,
+      "sha256": "da20bcf2b9b83a3595b8b1bf8312923dd6163dcabdf5dabfde758a26b27bf3c0"
     },
     {
       "path": "acl4ssr/Clash/Ruleset/Nintendo.list",
@@ -136,18 +136,18 @@
     },
     {
       "path": "acl4ssr/Clash/ProxyMedia.list",
-      "rules": 309,
-      "sha256": "5b6c7a07457e8a9cffd7a7a9865abfef72920b70a9ca987009710a44ccc98781"
+      "rules": 310,
+      "sha256": "9e09ef9064889a50894cbcef6a5adcc105dbec99b784b13e2f7501e6c0e18ec2"
     },
     {
       "path": "acl4ssr/Clash/ProxyGFWlist.list",
-      "rules": 7378,
-      "sha256": "537c8625e970894c5ac7420db820633817b17f493851c32af08274a7b247d5c4"
+      "rules": 7381,
+      "sha256": "c54881610a8c4c6d83289688514de097726ed1239afd652ff813bb85efa65560"
     },
     {
       "path": "acl4ssr/Clash/ChinaDomain.list",
-      "rules": 635,
-      "sha256": "362edd1f605742b360eaf138f151d7eea96cc17f20ef12da73acbfb80c350e08"
+      "rules": 643,
+      "sha256": "92f90e75ffc64dd2996552593a66e0d46a841ee0ff50c0efecbfc9d7cd6e2ed4"
     },
     {
       "path": "acl4ssr/Clash/ChinaCompanyIp.list",
